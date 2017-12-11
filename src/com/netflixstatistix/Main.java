@@ -3,13 +3,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.SwingUtilities;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        String connectionUrl = "jdbc:sqlserver:C:\\TEMP\\sqljdbc_4.2\\enu\\sqljdbc42.jar;"
-                                + "databaseName=NetflixStatistix;integratedSecurity=true;";
+        String connectionUrl = "jdbc:sqlserver://localhost\\SQLEXPRESS;"
+                                + "databaseName=Bibliotheek;integratedSecurity=true;";
         Connection con = null;                                              // Connection beheert informatie over de connectie met de database.
         Statement stmt = null;                                              // Statement zorgt dat we een SQL query kunnen uitvoeren.
         ResultSet rs = null;                                                // ResultSet is de tabel die we van de database terugkrijgen.
@@ -50,5 +51,7 @@ public class Main {
             if (stmt != null) try { stmt.close(); } catch(Exception e) {}
             if (con != null) try { con.close(); } catch(Exception e) {}
         }
+        SwingUtilities.invokeLater(new UI());
+
     }
 }
