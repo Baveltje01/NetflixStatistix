@@ -9,6 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+
         String connectionUrl = "jdbc:sqlserver://localhost\\SQLEXPRESS;"
                                 + "databaseName=Bibliotheek;integratedSecurity=true;";
         Connection con = null;                                              // Connection beheert informatie over de connectie met de database.

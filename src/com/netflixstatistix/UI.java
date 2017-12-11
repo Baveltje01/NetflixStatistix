@@ -3,9 +3,14 @@ package com.netflixstatistix;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 
 public class UI implements Runnable {
 
+    // Creating appversion object for version details
+    AppDetails appDetails = new AppDetails();
+
+    // Creating JFrame which acts as main container.
     private JFrame frame;
 
     private JMenuBar topMenuBar;
@@ -24,6 +29,7 @@ public class UI implements Runnable {
     public void run() {
         this.frame = new JFrame("Netflix Statistix");
         this.frame.setPreferredSize(new Dimension(800, 800));
+        this.frame.setResizable(false);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,6 +114,20 @@ public class UI implements Runnable {
         label2.setFont(new Font("Arial", Font.BOLD, 36));
         label2.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         pane.add(label2, BorderLayout.CENTER);
+
+        // ///////////////////////////////// //
+        // Build the credits menu            //
+        // ///////////////////////////////// //
+
+        JPanel creditsContainer = new JPanel(new BorderLayout());
+        creditsContainer.setBorder(new EmptyBorder(3, 10, 3, 10));
+        JLabel creditsAppVersion = new JLabel("Netflix Statistix versie " + appDetails.getVersion(), JLabel.LEFT);
+        JLabel credits = new JLabel("Informatica 2017 - Klas E - " + appDetails.getAuthors(), JLabel.RIGHT);
+        creditsContainer.add(creditsAppVersion, BorderLayout.WEST);
+        creditsContainer.add(credits, BorderLayout.EAST);
+        pane.add(creditsContainer, BorderLayout.SOUTH);
+
+
 //END GUI
     }
 
