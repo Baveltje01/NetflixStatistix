@@ -2,13 +2,17 @@ package com.netflixstatistix;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 public class UI implements Runnable {
 
+
     // Creating appversion object for version details
     AppDetails appDetails = new AppDetails();
+
+    // Border variable for easy configuration
+   Border grey = BorderFactory.createLineBorder(Color.lightGray);
 
     // Creating JFrame which acts as main container.
     private JFrame frame;
@@ -59,12 +63,12 @@ public class UI implements Runnable {
 
         // login
         loginMenuItem = new JMenuItem("Inloggen");
-        loginMenuItem.setEnabled(loggedIn);                                                           //<< TESTING SETTING
+        loginMenuItem.setEnabled(loggedIn);                                                         //<< TESTING SETTING
         accountMenu.add(loginMenuItem);
 
         // logout
         logoutMenuItem = new JMenuItem("Afmelden");
-        logoutMenuItem.setEnabled(!loggedIn);                                                           //<< TESTING SETTING
+        logoutMenuItem.setEnabled(!loggedIn);                                                       //<< TESTING SETTING
         accountMenu.add(logoutMenuItem);
 
         // ///////////////////////////////// //
@@ -101,19 +105,42 @@ public class UI implements Runnable {
         topMenuBar.add(dataMenu);
         topMenuBar.add(infoMenu);
 
-        frame.setJMenuBar(topMenuBar);                                                                //<< CHECK OPT
+        frame.setJMenuBar(topMenuBar);
 //END MENU
 
 //GUI
         JLabel label = new JLabel("West", JLabel.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 36));
-        label.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        label.setBorder(grey);
         pane.add(label, BorderLayout.WEST);
 
         JLabel label2 = new JLabel("CENTER", JLabel.CENTER);
         label2.setFont(new Font("Arial", Font.BOLD, 36));
-        label2.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        label2.setBorder(grey);
         pane.add(label2, BorderLayout.CENTER);
+
+
+        // ///////////////////////////////// //
+        // Build the left menu               //
+        // ///////////////////////////////// //
+
+        JPanel userContainer = new JPanel(new BorderLayout());
+
+        // User Dropdown Menu
+        String[] userArray = {"Bas", "Tom", "Robin", "Jac"};
+        JComboBox usersDropdown = new JComboBox(userArray);
+        usersDropdown.setSelectedIndex(0);
+        usersDropdown.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXX"); // Hack for altering size
+
+        userContainer.add(usersDropdown, BorderLayout.NORTH);
+        JPanel westContainer = new JPanel(new BorderLayout());
+        westContainer.setBorder(grey);
+        westContainer.add(userContainer, BorderLayout.NORTH);
+        pane.add(westContainer, BorderLayout.WEST);
+
+
+
+
 
         // ///////////////////////////////// //
         // Build the credits menu            //
