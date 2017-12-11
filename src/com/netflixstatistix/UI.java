@@ -9,7 +9,8 @@ public class UI implements Runnable {
 
 
     // Creating appversion object for version details
-    AppDetails appDetails = new AppDetails();
+    private AppDetails appDetails = new AppDetails();
+    private TimeKeeper timeKeeper = new TimeKeeper();
 
     // Border variable for easy configuration
    Border grey = BorderFactory.createLineBorder(Color.lightGray);
@@ -114,7 +115,7 @@ public class UI implements Runnable {
         label.setBorder(grey);
         pane.add(label, BorderLayout.WEST);
 
-        JLabel label2 = new JLabel("CENTER", JLabel.CENTER);
+        JLabel label2 = new JLabel(timeKeeper.greeting() + timeKeeper.getTime("hour"), JLabel.CENTER);
         label2.setFont(new Font("Arial", Font.BOLD, 36));
         label2.setBorder(grey);
         pane.add(label2, BorderLayout.CENTER);
