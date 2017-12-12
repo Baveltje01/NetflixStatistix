@@ -26,7 +26,9 @@ public class TimeKeeper {
        public String greeting() {
            int hour = getTime("hour");
 
-           if (hour>=1 && hour<=12){
+           if (hour>=0 && hour<=6) {
+               return "Goedenavond";
+           } else if (hour>=6 && hour<=12){
                return "Goedemorgen";
            } else if (hour>=12 && hour<=16){
                return "Goedemiddag";
