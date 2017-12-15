@@ -1,4 +1,4 @@
-package com.netflixstatistix;
+package com.netflixstatistix.userinterface;
 
 public class AppDetails {
 

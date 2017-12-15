@@ -1,9 +1,9 @@
-package com.netflixstatistix;
+package com.netflixstatistix.userinterface;
 
-import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 public class UI implements Runnable {
 
@@ -17,20 +17,20 @@ public class UI implements Runnable {
     private TimeKeeper timeKeeper = new TimeKeeper();
 
     // Variables for easy configuration
-   private Border grey = BorderFactory.createLineBorder(Color.lightGray);
+    private Border grey = BorderFactory.createLineBorder(Color.lightGray);
 
     // Creating JFrame which acts as main container.
     private JFrame frame;
 
     private JMenuBar topMenuBar;
-        private JMenu accountMenu;
-            private JMenuItem loginMenuItem;
-            private JMenuItem logoutMenuItem;
-        private JMenu dataMenu;
-            private JMenuItem refreshDataMenuItem;
-        private JMenu infoMenu;
-            private JMenuItem avansItemMenu;
-            private JMenuItem aboutItemMenu;
+    private JMenu accountMenu;
+    private JMenuItem loginMenuItem;
+    private JMenuItem logoutMenuItem;
+    private JMenu dataMenu;
+    private JMenuItem refreshDataMenuItem;
+    private JMenu infoMenu;
+    private JMenuItem avansItemMenu;
+    private JMenuItem aboutItemMenu;
 
     private boolean loggedIn;
 
