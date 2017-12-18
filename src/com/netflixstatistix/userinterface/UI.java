@@ -4,12 +4,14 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import jgravatar.*;
 
 public class UI implements Runnable {
 
 
     // For testing purposes only
     public String user = "Bas";                                                                     //<< TESTING SETTING
+    public String subscriberEmail = "basvanrooten@me.com";
 
 
     // Initializing different classes
@@ -136,9 +138,17 @@ public class UI implements Runnable {
         // UserDetails Menu
         JPanel userSubContainer = new JPanel(new BorderLayout());
         userSubContainer.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        //Grabbing subscriber-gravatar image
+        Gravatar gravatar = new Gravatar();
+        gravatar.setSize(150);
+        byte[] gravatarByte = gravatar.download(subscriberEmail);
+        JLabel gravatarImage = new JLabel(new ImageIcon(gravatarByte));
+        userSubContainer.add(gravatarImage, BorderLayout.NORTH);
+
         JLabel greeting = new JLabel(timeKeeper.greeting() + " " + this.user, JLabel.CENTER);
         greeting.setFont(new Font("Arial", Font.PLAIN, 18));
-        userSubContainer.add(greeting);
+        userSubContainer.add(greeting, BorderLayout.SOUTH);
 
         userContainer.add(userSubContainer, BorderLayout.SOUTH);
 
