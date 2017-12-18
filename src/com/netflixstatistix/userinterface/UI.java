@@ -38,7 +38,7 @@ public class UI implements Runnable {
     public void run() {
         this.frame = new JFrame("Netflix Statistix");
         this.frame.setPreferredSize(new Dimension(800, 800));
-        this.frame.setResizable(false);
+        //this.frame.setResizable(false);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
