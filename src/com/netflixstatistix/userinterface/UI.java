@@ -4,19 +4,22 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import jgravatar.*;
+import com.netflixstatistix.jgravatar.*;
 
 public class UI implements Runnable {
 
 
     // For testing purposes only
+    public boolean loggedIn;
     public String user = "Bas";                                                                     //<< TESTING SETTING
     public String subscriberEmail = "basvanrooten@me.com";
+    public String movieName = "Stranger Things";
 
 
     // Initializing different classes
     private AppDetails appDetails = new AppDetails();
     private TimeKeeper timeKeeper = new TimeKeeper();
+    private Gravatar gravatar = new Gravatar();
 
     // Variables for easy configuration
     private Border grey = BorderFactory.createLineBorder(Color.lightGray);
@@ -33,8 +36,6 @@ public class UI implements Runnable {
     private JMenu infoMenu;
     private JMenuItem avansItemMenu;
     private JMenuItem aboutItemMenu;
-
-    private boolean loggedIn;
 
     @Override
     public void run() {
@@ -116,10 +117,29 @@ public class UI implements Runnable {
 //END MENU
 
 //GUI
-        JLabel label2 = new JLabel(timeKeeper.greeting(), JLabel.CENTER);
-        label2.setFont(new Font("Arial", Font.BOLD, 36));
-        label2.setBorder(grey);
-        pane.add(label2, BorderLayout.CENTER);
+
+        // //////////////////////////////// //
+        // Build the right menu             //
+        // //////////////////////////////// //
+
+        JPanel centerContainer = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc1 = new GridBagConstraints();
+
+        JLabel detailTitle = new JLabel("Details van " + movieName, JLabel.CENTER);            // TESTING SETTING
+        detailTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        gbc1.gridx = 0;
+        gbc1.gridy = 1;
+
+
+
+
+
+
+        centerContainer.add(detailTitle, gbc1);
+        centerContainer.setBorder(grey);
+
+        centerContainer.setBorder(new EmptyBorder(20,20,20,20));
+        pane.add(centerContainer, BorderLayout.CENTER);
 
 
         // ///////////////////////////////// //
@@ -140,7 +160,6 @@ public class UI implements Runnable {
         userSubContainer.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         //Grabbing subscriber-gravatar image
-        Gravatar gravatar = new Gravatar();
         gravatar.setSize(150);
         byte[] gravatarByte = gravatar.download(subscriberEmail);
         JLabel gravatarImage = new JLabel(new ImageIcon(gravatarByte));
@@ -155,10 +174,10 @@ public class UI implements Runnable {
 
         // TV-Show Selector
         JPanel showSubContainer = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.weightx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.weightx = 1;
+        gbc2.fill = GridBagConstraints.HORIZONTAL;
+        gbc2.gridwidth = GridBagConstraints.REMAINDER;
 
         JButton show1 = new JButton("Serie 1");
         show1.setMargin(new Insets(5, 0, 5, 0));
@@ -181,16 +200,16 @@ public class UI implements Runnable {
         JButton selector = new JButton("Nieuwe serie");
         selector.setMargin(new Insets(5, 0, 5, 0));
 
-        showSubContainer.add(show1, gbc);
-        showSubContainer.add(show2, gbc);
-        showSubContainer.add(show3, gbc);
-        showSubContainer.add(show4, gbc);
-        showSubContainer.add(show5, gbc);
-        showSubContainer.add(show6, gbc);
-        showSubContainer.add(show7, gbc);
-        showSubContainer.add(show8, gbc);
-        showSubContainer.add(show9, gbc);
-        showSubContainer.add(selector, gbc);
+        showSubContainer.add(show1, gbc2);
+        showSubContainer.add(show2, gbc2);
+        showSubContainer.add(show3, gbc2);
+        showSubContainer.add(show4, gbc2);
+        showSubContainer.add(show5, gbc2);
+        showSubContainer.add(show6, gbc2);
+        showSubContainer.add(show7, gbc2);
+        showSubContainer.add(show8, gbc2);
+        showSubContainer.add(show9, gbc2);
+        showSubContainer.add(selector, gbc2);
 
 
         JPanel westContainer = new JPanel(new BorderLayout());

@@ -1,4 +1,4 @@
-package jgravatar;
+package com.netflixstatistix.jgravatar;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

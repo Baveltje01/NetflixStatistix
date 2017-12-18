@@ -1,4 +1,4 @@
-package jgravatar;
+package com.netflixstatistix.jgravatar;
 
 public enum GravatarRating {
 
