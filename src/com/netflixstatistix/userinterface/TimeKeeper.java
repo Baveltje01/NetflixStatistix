@@ -30,9 +30,9 @@ public class TimeKeeper {
                return "Goedenavond";
            } else if (hour>=6 && hour<=12){
                return "Goedemorgen";
-           } else if (hour>=12 && hour<=16){
+           } else if (hour>=12 && hour<=17){
                return "Goedemiddag";
-           } else if (hour>=21 && hour<=24) {
+           } else if (hour>=18 && hour<=24) {
                return "Goedenavond";
            } else {
                return "Hallo";
