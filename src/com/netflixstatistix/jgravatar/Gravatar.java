@@ -11,24 +11,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
-/**
- * A gravatar is a dynamic image resource that is requested from the
- * gravatar.com server. This class calculates the gravatar url and fetches
- * gravatar images. See http://en.gravatar.com/site/implement/url .
- * 
- * This class is thread-safe, Gravatar objects can be shared.
- * 
- * Usage example:
- * 
- * <code>
- * Gravatar gravatar = new Gravatar();
- * gravatar.setSize(50);
- * gravatar.setRating(GravatarRating.GENERAL_AUDIENCES);
- * gravatar.setDefaultImage(GravatarDefaultImage.IDENTICON);
- * String url = gravatar.getUrl("iHaveAn@email.com");
- * byte[] jpg = gravatar.download("info@ralfebert.de");
- * </code>
- */
 public final class Gravatar {
 
 	private final static int DEFAULT_SIZE = 80;

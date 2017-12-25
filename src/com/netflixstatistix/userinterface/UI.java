@@ -130,15 +130,41 @@ public class UI implements Runnable {
         gbc1.gridx = 0;
         gbc1.gridy = 1;
 
-
-
-
-
-
         centerContainer.add(detailTitle, gbc1);
-        centerContainer.setBorder(grey);
 
-        centerContainer.setBorder(new EmptyBorder(20,20,20,20));
+        // TABLE HEADER
+        String[] columns = new String[] {
+                "Statistiek", "Resultaat"
+        };
+
+        // TABLE DATA
+        Object[][] data = new Object[][] {
+                {"Versiebeheer", appDetails.getAuthors()},
+                {2, "A"},
+                {2, "B"},
+                {2, "C"},
+                {2, "D"},
+                {2, "E"},
+                {2, "F"},
+                {2, "G"},
+                {2, "H"},
+                {2, "I"},
+                {2, "J"},
+                {2, "K"},
+                {2, "L"},
+                {2, "M"},
+                {3, "N"}
+        };
+        //create table with data
+        JTable table = new JTable(data, columns);
+        table.getTableHeader().setReorderingAllowed(false);
+
+        gbc1.gridx = 0;
+        gbc1.gridy = 2;
+        centerContainer.add(new JScrollPane(table), gbc1);
+
+        centerContainer.setBorder(grey);
+        centerContainer.setBorder(new EmptyBorder(10,10,10,10));
         pane.add(centerContainer, BorderLayout.CENTER);
 
 
@@ -197,8 +223,8 @@ public class UI implements Runnable {
         show8.setMargin(new Insets(5, 0, 5, 0));
         JButton show9 = new JButton("Serie 9");
         show9.setMargin(new Insets(5, 0, 5, 0));
-        JButton selector = new JButton("Nieuwe serie");
-        selector.setMargin(new Insets(5, 0, 5, 0));
+        JButton show10 = new JButton("Serie 10");
+        show10.setMargin(new Insets(5, 0, 5, 0));
 
         showSubContainer.add(show1, gbc2);
         showSubContainer.add(show2, gbc2);
@@ -209,7 +235,7 @@ public class UI implements Runnable {
         showSubContainer.add(show7, gbc2);
         showSubContainer.add(show8, gbc2);
         showSubContainer.add(show9, gbc2);
-        showSubContainer.add(selector, gbc2);
+        showSubContainer.add(show10, gbc2);
 
 
         JPanel westContainer = new JPanel(new BorderLayout());
