@@ -21,7 +21,6 @@ Afgeleid van gitignore.io
 
 # Gradle:
 .idea/**/gradle.xml
-.idea/**/libraries
 
 # CMake
 cmake-build-debug/
