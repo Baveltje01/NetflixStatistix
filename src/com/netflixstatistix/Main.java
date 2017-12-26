@@ -19,6 +19,7 @@ public class Main {
         //Testing DatabaseInterface
         System.out.println(di.getTotalEpisodesInSerie("Sherlock"));
         System.out.println(di.getWatchTime(1001, "Frank"));
+        System.out.println(di.getProfielenFromAbonnee(5602533));
         DatabaseConnection.disconnect();
 
 

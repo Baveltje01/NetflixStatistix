@@ -26,6 +26,16 @@ public class DatabaseInterface{
         } else {
             return 0;
         }
+    }
 
+    public String[] getProfielenFromAbonnee(int profielID) throws SQLException {
+        rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profielnaam FROM Profiel WHERE ProfielID = '" + profielID + "';");
+        int i = 0;
+        String[] profielen = new String[rs.getMetaData().getColumnCount()];
+        while (rs.next()) {
+            profielen[i] = rs.getString("Profielnaam");
+            i++;
+        }
+        return profielen;
     }
 }
