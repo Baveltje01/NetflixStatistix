@@ -14,6 +14,7 @@ public class UI implements Runnable {
     public String user = "Bas";                                                                     //<< TESTING SETTING
     public String subscriberEmail = "basvanrooten@me.com";
     public String movieName = "Stranger Things";
+    public String[] userArray = {"Bas", "Tom"};
 
 
     // Initializing different classes
@@ -175,8 +176,6 @@ public class UI implements Runnable {
 
         // User Dropdown Menu
         JPanel userContainer = new JPanel(new BorderLayout());
-
-        String[] userArray = {"Bas", "Tom", "Robin", "Jac"};
         JComboBox usersDropdown = new JComboBox(userArray);
         usersDropdown.setSelectedIndex(0);
         userContainer.add(usersDropdown, BorderLayout.NORTH);

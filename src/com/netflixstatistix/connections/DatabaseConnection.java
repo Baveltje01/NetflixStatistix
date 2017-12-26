@@ -7,7 +7,7 @@ public class DatabaseConnection {
 
     public static void connect()   {                // Responsible for establishing a connection
         String connectionUrl;                       // URL for connection
-        connectionUrl = "jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=NetflixStatistixTest;integratedSecurity=true;";
+        connectionUrl = "jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=NetflixStatistix;integratedSecurity=true;";
         connection = null;                          // Makes sure connection is empty
 
         try {
