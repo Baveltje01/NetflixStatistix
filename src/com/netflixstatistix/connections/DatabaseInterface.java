@@ -2,20 +2,30 @@ package com.netflixstatistix.connections;
 
 import java.sql.*;
 
-public class DatabaseInterface {
+public class DatabaseInterface{
 
 
-    public ResultSet rs;
-
-
+    private ResultSet rs;
 
 
     // (INT) GET WATCH TIME -> ProgrammaID, Profielnaam
-    public int getWatchTime(int programmaID, String profielnaam) throws SQLException
-    {
-        rs = DatabaseConnection.giveStatementAndGetResult( "SELECT Percentage FROM BekekenProgramma WHERE ProgrammaID = '" + programmaID + "' AND Profielnaam = '" + profielnaam + "';");
-        rs.next();
-            int watchTime = rs.getInt("Percentage");
-            return watchTime;
+    public int getWatchTime(int programmaID, String profielnaam) throws SQLException {
+        rs = DatabaseConnection.giveStatementAndGetResult("SELECT Percentage FROM BekekenProgramma WHERE ProgrammaID = '" + programmaID + "' AND Profielnaam = '" + profielnaam + "';");
+        if (rs.next()) {
+            return rs.getInt("Percentage");
+        } else {
+            return 0;
+        }
+    }
+
+    // (INT) GET AMOUNT OF EPISODES PER SERIE AMOUNT -> ProgrammaID
+    public int getTotalEpisodesInSerie(String serieNaam) throws SQLException {
+        rs = DatabaseConnection.giveStatementAndGetResult("SELECT COUNT(Serie) AS Total FROM Aflevering WHERE Serie = '" + serieNaam + "';");
+        if (rs.next()) {
+            return rs.getInt("Total");
+        } else {
+            return 0;
+        }
+
     }
 }
