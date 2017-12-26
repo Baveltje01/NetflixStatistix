@@ -4,9 +4,12 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.sql.SQLException;
+
+import com.netflixstatistix.connections.DatabaseInterface;
 import com.netflixstatistix.jgravatar.*;
 
-public class UI implements Runnable {
+public class UI implements Runnable{
 
 
     // For testing purposes only
@@ -21,6 +24,7 @@ public class UI implements Runnable {
     private AppDetails appDetails = new AppDetails();
     private TimeKeeper timeKeeper = new TimeKeeper();
     private Gravatar gravatar = new Gravatar();
+    private DatabaseInterface di = new DatabaseInterface();
 
     // Variables for easy configuration
     private Border grey = BorderFactory.createLineBorder(Color.lightGray);
@@ -141,7 +145,7 @@ public class UI implements Runnable {
         // TABLE DATA
         Object[][] data = new Object[][] {
                 {"Versiebeheer", appDetails.getAuthors()},
-                {2, "A"},
+                {2, "B"},
                 {2, "B"},
                 {2, "C"},
                 {2, "D"},

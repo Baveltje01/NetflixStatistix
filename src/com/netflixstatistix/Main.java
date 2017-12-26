@@ -9,9 +9,8 @@ public class Main {
     public static void main(String[] args) {
 
         DatabaseConnection.connect();
-        DatabaseConnection.disconnect();
-
         SwingUtilities.invokeLater(new UI());
+        DatabaseConnection.disconnect();
 
 
     }
