@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.sql.SQLException;
 
 import com.netflixstatistix.connections.DatabaseInterface;
 import com.netflixstatistix.jgravatar.*;

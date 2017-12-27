@@ -1,6 +1,7 @@
 package com.netflixstatistix.connections;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseInterface{
 
@@ -30,13 +31,13 @@ public class DatabaseInterface{
 
     public String[] getProfielenFromAbonnee(int profielID) throws SQLException {
         rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profielnaam FROM Profiel WHERE ProfielID = '" + profielID + "';");
-        int i = 0;
-        String[] profielen = new String[rs.getMetaData().getColumnCount()];
+        ArrayList<String> profielen = new ArrayList<String>();
         while (rs.next()) {
-            profielen[i] = rs.getString("Profielnaam");
-            i++;
+            profielen.add(rs.getString("Profielnaam"));
         }
-        return profielen;
+        String[] array = new String[profielen.size()];
+        array = profielen.toArray(array);
+        return array;
     }
 
     public String getLongestMovieByMaxAge(int age) throws SQLException {
