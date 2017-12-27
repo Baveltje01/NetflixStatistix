@@ -22,6 +22,8 @@ public class Main {
         System.out.println(di.getWatchTime(1001, "Frank"));
         System.out.println(di.getLongestMovieByMaxAge(16));
         System.out.println(Arrays.toString(di.getProfielenFromAbonnee(1215426)));
+        System.out.println(di.getHowManyViewersViewedThisMovieCompletely("The Life of Brian"));
+        System.out.println(Arrays.toString(di.getAccountsWithSingleProfile()));
         DatabaseConnection.disconnect();
 
 
