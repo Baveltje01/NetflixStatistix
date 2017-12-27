@@ -38,4 +38,14 @@ public class DatabaseInterface{
         }
         return profielen;
     }
+
+    public String getLongestMovieByMaxAge(int age) throws SQLException {
+        rs = DatabaseConnection.giveStatementAndGetResult("SELECT Titel FROM Film WHERE GeschikteLeeftijd < " + age + " ORDER BY Tijdsduur DESC;");
+        if (rs.next()) {
+            return rs.getString("Titel");
+        } else {
+            return "Geen film gevonden";
+        }
+
+    }
 }
