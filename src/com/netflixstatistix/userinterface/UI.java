@@ -24,6 +24,7 @@ public class UI implements Runnable{
     private TimeKeeper timeKeeper = new TimeKeeper();
     private Gravatar gravatar = new Gravatar();
     private DatabaseInterface di = new DatabaseInterface();
+    private UIHandler ui = new UIHandler();
 
     // Variables for easy configuration
     private Border grey = BorderFactory.createLineBorder(Color.lightGray);
@@ -46,6 +47,9 @@ public class UI implements Runnable{
         this.frame = new JFrame("Netflix Statistix");
         this.frame.setPreferredSize(new Dimension(800, 800));
         this.frame.setMinimumSize(new Dimension(700,700));
+
+        ImageIcon icon = new ImageIcon("src\\com.netflixstatistix\\userinterface\\netflix.ico");
+        this.frame.setIconImage(icon.getImage());
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
