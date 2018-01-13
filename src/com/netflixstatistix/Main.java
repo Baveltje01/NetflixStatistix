@@ -8,9 +8,7 @@ import javax.swing.SwingUtilities;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) throws Exception{
-
-        Thread.setDefaultUncaughtExceptionHandler(new ExeptionHandler());
+    public static void main(String[] args){
         DatabaseConnection.connect();
         SwingUtilities.invokeLater(new UI());
 
