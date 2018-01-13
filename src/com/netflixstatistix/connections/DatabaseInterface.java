@@ -76,6 +76,25 @@ public class DatabaseInterface {
         }
     }
 
+    // (String[]) GET ALLE FILMS BEKEKEN DOOR GESELECTEERD ACCOUNT (via AbonneeID)
+    public String[] getAllMoviesWatchedByAccount(int AbonneeID) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Film.Titel FROM Film JOIN Programma ON Film.ProgrammaID = Programma.ProgrammaID JOIN BekekenProgramma ON Programma.ProgrammaID = BekekenProgramma.ProgrammaID JOIN Profiel ON Profiel.Profielnaam = BekekenProgramma.Profielnaam AND Profiel.Geboortedatum = BekekenProgramma.Geboortedatum JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '" + AbonneeID + "'");
+            ArrayList<String> filmsBekekenDoorAccount = new ArrayList<String>();
+            while (rs.next()) {
+                filmsBekekenDoorAccount.add(rs.getString("Profielnaam"));
+            }
+            String[] array = new String[filmsBekekenDoorAccount.size()];
+            array = filmsBekekenDoorAccount.toArray(array);
+            return array;
+
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            String[] array2 = new String[0];
+            Arrays.fill(array2, "Error fetching list of movies watched by this account ID");
+            return array2;
+        }
+    }
 
 
     // GET ALLE ACCOUNTS MET SLECHTS 1 ENKEL PROFIEL
