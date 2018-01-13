@@ -114,5 +114,162 @@ public class DatabaseInterface {
         }
     }
 
+    // Account toevoegen (AbonneeID = PK)
+    public void addAccount (int AbonneeID, String Email, String Wachtwoord, String Naam, String Straat, String Huisnummer, String Postcode, String Woonplaats) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO Abonnee (AbonneeID,Email,Wachtwoord,Naam,Straat,Huisnummer,Postcode,Woonplaats) VALUES ('" + AbonneeID + "','" + Email + "','" + Wachtwoord + "','" + Naam + "','" + Straat + "','" + Huisnummer + "','" + Postcode + "','" + Woonplaats + "');");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Account verwijderen
+    public void deleteAccount (int AbonneeID) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("DELETE FROM Abonnee WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Account Email aanpassen
+    public void changeAccountEmail (int AccountID, String newEmail) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Email = '" + newEmail + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Account Wachtwoord aanpassen
+    public void changeAccountPassword (int AccountID, String newPassword) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Wachtwoord = '" + newPassword + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Account Naam aanpassen
+    public void changeAccountName (int AccountID, String newName) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Naam = '" + newName + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Account Straat aanpassen
+    public void changeAccountStreet (int AccountID, String newStreet) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Straat = '" + newStreet + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Account Huisnummer aanpassen
+    public void changeAccountHouseNumber (int AccountID, String newHouseNumber) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Huisnummer = '" + newHouseNumber + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Account Postcode aanpassen
+    public void changeAccountZIP (int AccountID, String newZIP) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Postcode = '" + newZIP + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Account Woonplaats aanpassen
+    public void changeCity (int AccountID, String newCity) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Woonplaats = '" + newCity + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Profiel toevoegen(Profielnaam + Geboortedatum = Composite PK. ProfielID = FK naar Abonnee.AbonneeID)
+    public void addProfile (String Profielnaam, String Geboortedatum, int AbonneeID) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO Profiel (Profielnaam,Geboortedatum,AbonneeID) VALUES ('" + Profielnaam + "','" + Geboortedatum + "','" + AbonneeID + "');");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Profiel van account verwijderen
+    public void deleteProfile (String Profielnaam, String Geboortedatum) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("DELETE FROM Profiel WHERE Profiel.Profielnaam = '" + Profielnaam + "' AND Profiel.Geboortedatum = '" + Geboortedatum + "';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Profielnaam aanpassen
+    public void changeProfileName (String nieuweProfielnaam, String oudeProfielnaam, String Geboortedatum) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Profiel.Profielnaam = '" + nieuweProfielnaam + "' WHERE  Profiel.Profielnaam = '" + oudeProfielnaam + "' AND Profiel.Geboortedatum = '" + Geboortedatum + "';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Profiel Geboortedatum aanpassen
+    public void changeProfileDateOfBirth (String nieuweGeboortedatum, String Profielnaam, String oudeGeboortedatum) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Profiel.Geboortedatum = '" + nieuweGeboortedatum + "' WHERE  Profiel.Profielnaam = '" + Profielnaam + "' AND Profiel.Geboortedatum = '" + oudeGeboortedatum + "';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Bekeken Programma toevoegen
+    public void addWatchedProgram (int Percentage, String Profielnaam, String Geboortedatum, int ProgrammaID) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO BekekenProgramma(Percentage,Profielnaam,Geboortedatum,ProgrammaID) VALUES ('" + Percentage + "','" + Profielnaam + "','" + Geboortedatum + "','" + ProgrammaID + "');");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Bekeken Programma verwijderen
+    public void deleteWatchedProgram (String Profielnaam, String Geboortedatum, int ProgrammaID) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("DELETE FROM BekekenProgramma WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.Geboortedatum = '" + Geboortedatum + " AND BekekenProgramma.ProgrammaID = '" + ProgrammaID + "'';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+    // Bekeken Programma percentage bekeken aanpassen
+    public void adjustWatchedPercentage (int NieuwPercentage, String Profielnaam, String Geboortedatum, int ProgrammaID) {
+        try{
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE BekekenProgramma SET BekekenProgramma.Percentage = '" + NieuwPercentage + "' WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.Geboortedatum = '" + Geboortedatum + " AND BekekenProgramma.ProgrammaID = '" + ProgrammaID + "'';");
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
