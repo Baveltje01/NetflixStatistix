@@ -1,7 +1,6 @@
-package com.netflixstatistix.userinterface.About;
+package com.netflixstatistix.userinterface.about;
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class AboutContentPanel extends JPanel{
     public AboutContentPanel(){

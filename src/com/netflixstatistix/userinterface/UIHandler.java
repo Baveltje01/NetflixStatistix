@@ -12,6 +12,8 @@ import com.netflixstatistix.connections.DatabaseConnection;
 import com.netflixstatistix.connections.DatabaseInterface;
 import com.netflixstatistix.jgravatar.*;
 import com.netflixstatistix.session.Session;
+import com.netflixstatistix.userinterface.about.AboutInterface;
+import com.netflixstatistix.userinterface.accountselection.AccountInterface;
 
 public class UIHandler {
 
@@ -40,7 +42,11 @@ public class UIHandler {
         changeAccountMenuItem = new JMenuItem("Accountgegevens aanpassen");
         accountMenu.add(changeAccountMenuItem);
 
-
+        changeAccountMenuItem.addActionListener(new ActionListener() {  // NEW WINDOW OPENS ON PRESSING 'changeAccountMenuItem'
+            public void actionPerformed(ActionEvent e){
+                AccountInterface openAccountMenuItem = new AccountInterface("Account selectie");
+            }
+        });
 
         dataMenu = new JMenu("Gegevens");
 
@@ -58,6 +64,12 @@ public class UIHandler {
 
         aboutItemMenu = new JMenuItem("Over deze app");
         infoMenu.add(aboutItemMenu);
+
+        aboutItemMenu.addActionListener(new ActionListener() {  // NEW WINDOW OPENS ON PRESSING 'aboutItemMenu'
+            public void actionPerformed(ActionEvent e){
+                AboutInterface openAboutItemMenu = new AboutInterface("Account selectie");
+            }
+        });
 
         topMenuBar.add(accountMenu);
         topMenuBar.add(dataMenu);

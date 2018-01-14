@@ -1,4 +1,4 @@
-package com.netflixstatistix.userinterface.AccountSettings;
+package com.netflixstatistix.userinterface.accountselection;
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,6 +9,10 @@ public class AccountInterface extends JFrame{
     public AccountInterface(String title){
 
         super(title);
+
+        this.setSize(500,400);
+        this.setVisible(true);
+
         setLayout(new BorderLayout());                       // Layout
         AccountContentPanel contentPanel = new AccountContentPanel();      // Initiated from Class in same folder
 

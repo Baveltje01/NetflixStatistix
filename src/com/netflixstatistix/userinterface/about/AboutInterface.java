@@ -1,4 +1,4 @@
-package com.netflixstatistix.userinterface.About;
+package com.netflixstatistix.userinterface.about;
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,6 +8,11 @@ public class AboutInterface extends JFrame{
     public AboutInterface(String title){
 
         super(title);
+
+        this.setSize(500,400);
+        this.setVisible(true);
+
+
         setLayout(new BorderLayout());                       // Layout
         AboutContentPanel contentPanel = new AboutContentPanel();      // Initiated from Class in same folder
 

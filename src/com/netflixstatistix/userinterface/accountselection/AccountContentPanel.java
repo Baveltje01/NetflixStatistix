@@ -1,4 +1,4 @@
-package com.netflixstatistix.userinterface.AccountSettings;
+package com.netflixstatistix.userinterface.accountselection;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
