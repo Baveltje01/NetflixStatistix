@@ -308,11 +308,30 @@ public class DatabaseInterface {
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
             String[] array2 = new String[0];
-            Arrays.fill(array2, "Error fetching profiles");
+            Arrays.fill(array2, "Error fetching top 10 last viewed");
             return array2;
         }
     }
 
+    // GET LIST OF ACCOUNT NAMES
+    public String[] getListOfAccountNames() {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.Naam FROM Abonnee;");
+            ArrayList<String> listOfAccountNames = new ArrayList<String>();
+            while (rs.next()) {
+                listOfAccountNames.add(rs.getString("Lijst van Abonnees"));
+            }
+            String[] array = new String[listOfAccountNames.size()];
+            array = listOfAccountNames.toArray(array);
+            return array;
+
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            String[] array2 = new String[0];
+            Arrays.fill(array2, "Error fetching list of account names");
+            return array2;
+        }
+    }
 
 
 
