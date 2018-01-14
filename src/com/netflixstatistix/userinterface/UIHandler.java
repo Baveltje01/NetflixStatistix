@@ -12,13 +12,16 @@ package com.netflixstatistix.userinterface;
         import com.netflixstatistix.connections.DatabaseConnection;
         import com.netflixstatistix.connections.DatabaseInterface;
         import com.netflixstatistix.jgravatar.*;
-        import com.netflixstatistix.session.Session;
+        import com.netflixstatistix.session.CurrentSession;
         import com.netflixstatistix.userinterface.about.AboutInterface;
-        import com.netflixstatistix.userinterface.accountselection.AccountInterface;
 
+<<<<<<< HEAD
         import static java.awt.GridBagConstraints.FIRST_LINE_START;
 
 public class UIHandler {
+=======
+public class UIHandler extends CurrentSession {
+>>>>>>> 8140f41dd50597d7e671a9abce4d0001fb6ee6b7
 
 
     // GLOBAL DECLARATIONS
@@ -47,7 +50,7 @@ public class UIHandler {
 
         changeAccountMenuItem.addActionListener(new ActionListener() {                                                      // NEW WINDOW OPENS ON PRESSING 'changeAccountMenuItem'
             public void actionPerformed(ActionEvent e){
-                AccountInterface openAccountMenuItem = new AccountInterface("Account selectie");
+                                                                                                                            // STUB
             }
         });
 
