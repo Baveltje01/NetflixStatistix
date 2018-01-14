@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
 import com.netflixstatistix.connections.DatabaseConnection;
 import com.netflixstatistix.connections.DatabaseInterface;
@@ -110,7 +111,7 @@ public class UIHandler {
         return creditsContainer;
     }
 
-    public JPanel createShowSelector(String profielNaam, String[] latestVideoTitleArray) {
+    public JPanel createShowSelector(String profielNaam, ArrayList<String> latestVideoTitleArray) {
 
         DatabaseConnection.connect();
 
@@ -120,37 +121,13 @@ public class UIHandler {
         gbc2.fill = GridBagConstraints.HORIZONTAL;
         gbc2.gridwidth = GridBagConstraints.REMAINDER;
 
-        JButton show1 = new JButton(latestVideoTitleArray[0]);
-        show1.setMargin(new Insets(5, 0, 5, 0));
-        JButton show2 = new JButton(latestVideoTitleArray[1]);
-        show2.setMargin(new Insets(5, 0, 5, 0));
-        JButton show3 = new JButton(latestVideoTitleArray[2]);
-        show3.setMargin(new Insets(5, 0, 5, 0));
-//        JButton show4 = new JButton(latestVideoTitleArray[3]);
-//        show4.setMargin(new Insets(5, 0, 5, 0));
-//        JButton show5 = new JButton(latestVideoTitleArray[4]);
-//        show5.setMargin(new Insets(5, 0, 5, 0));
-//        JButton show6 = new JButton(latestVideoTitleArray[5]);
-//        show6.setMargin(new Insets(5, 0, 5, 0));
-//        JButton show7 = new JButton(latestVideoTitleArray[6]);
-//        show7.setMargin(new Insets(5, 0, 5, 0));
-//        JButton show8 = new JButton(latestVideoTitleArray[7]);
-//        show8.setMargin(new Insets(5, 0, 5, 0));
-//        JButton show9 = new JButton(latestVideoTitleArray[8]);
-//        show9.setMargin(new Insets(5, 0, 5, 0));
-//        JButton show10 = new JButton(latestVideoTitleArray[9]);
-//        show10.setMargin(new Insets(5, 0, 5, 0));
 
-        showSubContainer.add(show1, gbc2);
-        showSubContainer.add(show2, gbc2);
-        showSubContainer.add(show3, gbc2);
-//        showSubContainer.add(show4, gbc2);
-//        showSubContainer.add(show5, gbc2);
-//        showSubContainer.add(show6, gbc2);
-//        showSubContainer.add(show7, gbc2);
-//        showSubContainer.add(show8, gbc2);
-//        showSubContainer.add(show9, gbc2);
-//        showSubContainer.add(show10, gbc2);
+
+        for (String title : latestVideoTitleArray) {
+            JButton show = new JButton(title);
+            show.setMargin(new Insets(5, 0, 5, 0));
+            showSubContainer.add(show, gbc2);
+        }
 
         showSubContainer.validate();
         showSubContainer.repaint();

@@ -3,6 +3,8 @@ package com.netflixstatistix.session;
 import com.netflixstatistix.connections.DatabaseConnection;
 import com.netflixstatistix.connections.DatabaseInterface;
 
+import java.util.ArrayList;
+
 public class Session {
 
     // Required Dependencies
@@ -24,7 +26,7 @@ public class Session {
     private String profielGeboortedatum;
 
     // Video Statistics
-    private String[] latestVideoTitleArray;
+    private ArrayList<String> latestVideoTitleArray;
 
 
 
@@ -138,11 +140,11 @@ public class Session {
         this.profielGeboortedatum = profielGeboortedatum;
     }
 
-    public String[] getLatestVideoTitleArray() {
+    public ArrayList<String> getLatestVideoTitleArray() {
         return latestVideoTitleArray;
     }
 
-    public void setLatestVideoTitleArray(String[] latestVideoTitleArray) {
+    public void setLatestVideoTitleArray(ArrayList<String> latestVideoTitleArray) {
         this.latestVideoTitleArray = latestVideoTitleArray;
     }
 }
