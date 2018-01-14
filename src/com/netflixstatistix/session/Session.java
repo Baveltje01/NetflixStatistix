@@ -28,6 +28,8 @@ public class Session {
     // Video Statistics
     private ArrayList<String> latestVideoTitleArray;
 
+    private String currentVideoTitle;
+
 
 
     public Session() {
@@ -46,6 +48,7 @@ public class Session {
         this.profielGeboortedatum = di.getDateOfBirthFromProfile(this.profielNaam, this.abonneeID);
 
         this.latestVideoTitleArray = di.getTopTenLastViewedMoviesAndSeries(this.profielNaam, this.abonneeID);
+        this.currentVideoTitle = this.latestVideoTitleArray.get(0);
 
 
 
@@ -146,5 +149,13 @@ public class Session {
 
     public void setLatestVideoTitleArray(ArrayList<String> latestVideoTitleArray) {
         this.latestVideoTitleArray = latestVideoTitleArray;
+    }
+
+    public String getCurrentVideoTitle() {
+        return currentVideoTitle;
+    }
+
+    public void setCurrentVideoTitle(String currentVideoTitle) {
+        this.currentVideoTitle = currentVideoTitle;
     }
 }

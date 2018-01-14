@@ -10,7 +10,7 @@ import com.netflixstatistix.session.Session;
 public class UI implements Runnable{
 
     // Initializing different classes
-    private Session session = new Session();
+    public Session session = new Session();
     private DatabaseInterface di = new DatabaseInterface();
     private UIHandler uih = new UIHandler();
 

@@ -13,7 +13,7 @@ import com.netflixstatistix.connections.DatabaseInterface;
 import com.netflixstatistix.jgravatar.*;
 import com.netflixstatistix.session.Session;
 
-public class UIHandler extends UI{
+public class UIHandler {
 
 
     // GLOBAL DECLARATIONS
@@ -123,11 +123,11 @@ public class UIHandler extends UI{
         gbc2.fill = GridBagConstraints.HORIZONTAL;
         gbc2.gridwidth = GridBagConstraints.REMAINDER;
 
-
-
         for (String title : latestVideoTitleArray) {
             JButton show = new JButton(title);
+            FrameSwitcher frameSwitcher = new FrameSwitcher(show);
             show.setMargin(new Insets(5, 0, 5, 0));
+            show.addActionListener(frameSwitcher);
             showSubContainer.add(show, gbc2);
         }
 
