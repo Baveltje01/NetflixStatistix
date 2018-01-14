@@ -80,10 +80,10 @@ public class DatabaseInterface {
     // (String[]) GET ALL MOVIES VIEWED BY SINGLE ACCOUNT(via AbonneeID)
     public String[] getAllMoviesViewedByAccount(int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Film.Titel FROM Film JOIN Programma ON Film.ProgrammaID = Programma.ProgrammaID JOIN BekekenProgramma ON Programma.ProgrammaID = BekekenProgramma.ProgrammaID JOIN Profiel ON Profiel.Profielnaam = BekekenProgramma.Profielnaam AND Profiel.AbonneeID = BekekenProgramma.AbonneeID JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '" + AbonneeID + "'");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT DISTINCT Film.Titel FROM Film JOIN Programma ON Film.ProgrammaID = Programma.ProgrammaID JOIN BekekenProgramma ON Programma.ProgrammaID = BekekenProgramma.ProgrammaID JOIN Profiel ON Profiel.Profielnaam = BekekenProgramma.Profielnaam JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
             ArrayList<String> moviesViewedByAccount = new ArrayList<String>();
             while (rs.next()) {
-                moviesViewedByAccount.add(rs.getString("Profielnaam"));
+                moviesViewedByAccount.add(rs.getString("Titel"));
             }
             String[] array = new String[moviesViewedByAccount.size()];
             array = moviesViewedByAccount.toArray(array);
@@ -283,7 +283,7 @@ public class DatabaseInterface {
         try {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT TOP 1 Abonnee.Naam FROM Abonnee;");
             if (rs.next()) {
-                return rs.getString("Top 1 account");
+                return rs.getString("Naam");
             } else {
                 return "Geen account gevonden";
             }
@@ -296,10 +296,10 @@ public class DatabaseInterface {
     // (String[]) GET TOP 10 LAST VIEWED MOVIES AND EPISODES FROM PROFILE
     public String[] getTopTenLastViewedMoviesAndSeries(String Profielnaam, int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT TOP 10 BekekenProgramma.Titel FROM BekekenProgramma WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.AbonneeID = '" + AbonneeID + "' ORDER BY BekekenProgramma.LaatstBekeken DESC;");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT TOP 10 BekekenProgramma.Titel AS LaatstBekeken FROM BekekenProgramma WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.AbonneeID = '" + AbonneeID + "' ORDER BY BekekenProgramma.LaatstBekeken DESC;");
             ArrayList<String> lastViewedMoviesAndSeries = new ArrayList<String>();
             while (rs.next()) {
-                lastViewedMoviesAndSeries.add(rs.getString("Laatst bekeken films en afleveringen"));
+                lastViewedMoviesAndSeries.add(rs.getString("LaatstBekeken"));
             }
             String[] array = new String[lastViewedMoviesAndSeries.size()];
             array = lastViewedMoviesAndSeries.toArray(array);
@@ -319,7 +319,7 @@ public class DatabaseInterface {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.Naam FROM Abonnee;");
             ArrayList<String> listOfAccountNames = new ArrayList<String>();
             while (rs.next()) {
-                listOfAccountNames.add(rs.getString("Lijst van Abonnees"));
+                listOfAccountNames.add(rs.getString("Naam"));
             }
             String[] array = new String[listOfAccountNames.size()];
             array = listOfAccountNames.toArray(array);
@@ -339,7 +339,7 @@ public class DatabaseInterface {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profiel.Naam FROM Abonnee JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '"  + AbonneeID +  "';");
             ArrayList<String> listOfProfilesFromAccount = new ArrayList<String>();
             while (rs.next()) {
-                listOfProfilesFromAccount.add(rs.getString("Lijst van Abonnees"));
+                listOfProfilesFromAccount.add(rs.getString("Naam"));
             }
             String[] array = new String[listOfProfilesFromAccount.size()];
             array = listOfProfilesFromAccount.toArray(array);
@@ -356,7 +356,7 @@ public class DatabaseInterface {
     // (int) GET AMOUNT OF PROFILES ON ACCOUNT
     public int getAmountOfProfilesOnAccount(int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT COUNT(Profiel.Profielnaam) FROM Abonnee JOIN Profiel ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT COUNT(Profiel.Profielnaam) AS Total FROM Abonnee JOIN Profiel ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
             if (rs.next()) {
                 return rs.getInt("Total");
             } else {
@@ -478,7 +478,7 @@ public class DatabaseInterface {
         try {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profielnaam FROM Profiel WHERE Profielnaam = '" + Profielnaam + "' AND AbonneeID = '" + AbonneeID + "';");
             if (rs.next()) {
-                return rs.getString("Naam");
+                return rs.getString("Profielnaam");
             } else {
                 return "Geen Naam gevonden";
             }
@@ -508,7 +508,7 @@ public class DatabaseInterface {
         try {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.Naam FROM Profiel JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Profielnaam = '" + Profielnaam + "' AND AbonneeID = '" + AbonneeID + "';");
             if (rs.next()) {
-                return rs.getString("AbonneeNaam");
+                return rs.getString("Naam");
             } else {
                 return "Geen AbonneeNaam gevonden";
             }
