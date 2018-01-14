@@ -61,7 +61,6 @@ public class UI extends CurrentSession implements Runnable {
 
         // Credits Footer
         pane.add(uih.createFooter(), BorderLayout.SOUTH);
-        pane.remove(uih.createFooter());
 
 
     }

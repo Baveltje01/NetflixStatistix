@@ -13,9 +13,7 @@ package com.netflixstatistix.userinterface;
         import com.netflixstatistix.connections.DatabaseInterface;
         import com.netflixstatistix.jgravatar.*;
         import com.netflixstatistix.session.CurrentSession;
-        import com.netflixstatistix.session.Session;
         import com.netflixstatistix.userinterface.about.AboutInterface;
-        import com.netflixstatistix.userinterface.accountselection.AccountInterface;
 
 public class UIHandler extends CurrentSession {
 
@@ -46,7 +44,7 @@ public class UIHandler extends CurrentSession {
 
         changeAccountMenuItem.addActionListener(new ActionListener() {                                                      // NEW WINDOW OPENS ON PRESSING 'changeAccountMenuItem'
             public void actionPerformed(ActionEvent e){
-                AccountInterface openAccountMenuItem = new AccountInterface("Account selectie");
+                                                                                                                            // STUB
             }
         });
 
