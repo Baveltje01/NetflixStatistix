@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import com.netflixstatistix.connections.DatabaseConnection;
@@ -11,7 +13,7 @@ import com.netflixstatistix.connections.DatabaseInterface;
 import com.netflixstatistix.jgravatar.*;
 import com.netflixstatistix.session.Session;
 
-public class UIHandler {
+public class UIHandler extends UI{
 
 
     // GLOBAL DECLARATIONS
@@ -193,6 +195,5 @@ public class UIHandler {
 
         return centerContainer;
     }
-
 
 }

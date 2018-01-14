@@ -5,7 +5,6 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 import com.netflixstatistix.connections.DatabaseInterface;
-import com.netflixstatistix.jgravatar.*;
 import com.netflixstatistix.session.Session;
 
 public class UI implements Runnable{
@@ -55,9 +54,10 @@ public class UI implements Runnable{
 
         // Credits Footer
         pane.add(uih.createFooter(), BorderLayout.SOUTH);
+        pane.remove(uih.createFooter());
+
 
     }
-
     public JFrame getFrame() {
         return frame;
     }
