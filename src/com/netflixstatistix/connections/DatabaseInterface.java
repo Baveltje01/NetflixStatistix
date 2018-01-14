@@ -12,9 +12,9 @@ public class DatabaseInterface {
 
 
     // (INT) GET WATCH TIME
-    public int getWatchTime(int programmaID, String profielnaam) {
+    public int getWatchTime(int ProgrammaID, String Profielnaam, String Geboortedatum) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Percentage FROM BekekenProgramma WHERE ProgrammaID = '" + programmaID + "' AND Profielnaam = '" + profielnaam + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Percentage FROM BekekenProgramma WHERE ProgrammaID = '" + ProgrammaID + "' AND Profielnaam = '" + Profielnaam + "' AND Geboortedatum = '" + Geboortedatum + "';");
             if (rs.next()) {
                 return rs.getInt("Percentage");
             } else {
@@ -43,9 +43,9 @@ public class DatabaseInterface {
     }
 
     // (String[]) GET PROFIELEN FROM ABONNEE
-    public String[] getProfielenFromAbonnee(int profielID) {
+    public String[] getProfielenFromAbonnee(String Profielnaam, String Geboortedatum) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profielnaam FROM Profiel WHERE ProfielID = '" + profielID + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profielnaam FROM Profiel WHERE Profielnaam = '" + Profielnaam + " AND Geboortedatum = '" + Geboortedatum + "';");
             ArrayList<String> profielen = new ArrayList<String>();
             while (rs.next()) {
                 profielen.add(rs.getString("Profielnaam"));
@@ -101,7 +101,7 @@ public class DatabaseInterface {
     // (String[]) GET ALL ACCOUNTS WITH ONLY A SINGLE PROFILE
     public String[] getAccountsWithSingleProfile () {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.Naam FROM Profiel INNER JOIN Abonnee ON Profiel.ProfielID = Abonnee.AbonneeID GROUP BY Abonnee.Naam HAVING COUNT(*) = 1;");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.Naam FROM Profiel JOIN Abonnee ON Profiel.AbonneeID = Abonnee.AbonneeID GROUP BY Abonnee.Naam HAVING COUNT(*) = 1;");
             int i = 0;
             String[] accountsWithSingleProfile = new String[rs.getMetaData().getColumnCount()];
             if (!rs.next()) {
@@ -252,9 +252,9 @@ public class DatabaseInterface {
     }
 
     // ADD VIEWED PROGRAM
-    public void addWatchedProgram (int Percentage, String Profielnaam, String Geboortedatum, int ProgrammaID) {
+    public void addWatchedProgram (int Percentage, String Profielnaam, String Geboortedatum, int ProgrammaID, String Titel) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO BekekenProgramma(Percentage,Profielnaam,Geboortedatum,ProgrammaID,LaatstBekeken) VALUES ('" + Percentage + "','" + Profielnaam + "','" + Geboortedatum + "','" + ProgrammaID + "','" + LocalDateTime.now() + "');");
+            rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO BekekenProgramma(Percentage,Profielnaam,Geboortedatum,ProgrammaID,Titel,LaatstBekeken) VALUES ('" + Percentage + "','" + Profielnaam + "','" + Geboortedatum + "','" + ProgrammaID + "','" + Titel + "','" + LocalDateTime.now() + "');");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
@@ -290,6 +290,26 @@ public class DatabaseInterface {
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
             return "Error fetching top account";
+        }
+    }
+
+    // GET TOP 10 LAST VIEWED MOVIES AND EPISODES FROM PROFILE
+    public String[] getTopTenLastViewedMoviesAndSeries(String Profielnaam, String Geboortedatum) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT TOP 10 BekekenProgramma.Titel FROM BekekenProgramma WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.Geboortedatum = '" + Geboortedatum + "' ORDER BY BekekenProgramma.LaatstBekeken DESC;");
+            ArrayList<String> lastViewedMoviesAndSeries = new ArrayList<String>();
+            while (rs.next()) {
+                lastViewedMoviesAndSeries.add(rs.getString("Laatst bekeken films en afleveringen"));
+            }
+            String[] array = new String[lastViewedMoviesAndSeries.size()];
+            array = lastViewedMoviesAndSeries.toArray(array);
+            return array;
+
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            String[] array2 = new String[0];
+            Arrays.fill(array2, "Error fetching profiles");
+            return array2;
         }
     }
 
