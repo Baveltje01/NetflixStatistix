@@ -278,7 +278,7 @@ public class DatabaseInterface {
         }
     }
 
-    // SELECT TOP 1 ACCOUNT (FOR STARTING REFERENCE)
+    // (String) GET TOP 1 ACCOUNT (FOR STARTING REFERENCE)
     public String getTopAccount() {
         try {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT TOP 1 Abonnee.Naam FROM Abonnee;");
@@ -293,7 +293,7 @@ public class DatabaseInterface {
         }
     }
 
-    // GET TOP 10 LAST VIEWED MOVIES AND EPISODES FROM PROFILE
+    // (String[]) GET TOP 10 LAST VIEWED MOVIES AND EPISODES FROM PROFILE
     public String[] getTopTenLastViewedMoviesAndSeries(String Profielnaam, String Geboortedatum) {
         try {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT TOP 10 BekekenProgramma.Titel FROM BekekenProgramma WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.Geboortedatum = '" + Geboortedatum + "' ORDER BY BekekenProgramma.LaatstBekeken DESC;");
@@ -313,7 +313,7 @@ public class DatabaseInterface {
         }
     }
 
-    // GET LIST OF ACCOUNT NAMES
+    // (String[]) GET LIST OF ACCOUNT NAMES
     public String[] getListOfAccountNames() {
         try {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.Naam FROM Abonnee;");
@@ -333,7 +333,7 @@ public class DatabaseInterface {
         }
     }
 
-    // GET LIST OF PROFILE NAMES FROM ACCOUNT
+    // (String[]) GET LIST OF PROFILE NAMES FROM ACCOUNT
     public String[] getListOfProfilesFromAccount(int AbonneeID) {
         try {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profiel.Naam FROM Abonnee JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '"  + AbonneeID +  "';");
@@ -353,6 +353,20 @@ public class DatabaseInterface {
         }
     }
 
+    // (int) GET AMOUNT OF PROFILES ON ACCOUNT
+    public int getAmountOfProfilesOnAccount(int AbonneeID) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT COUNT(Profiel.Profielnaam) FROM Abonnee JOIN Profiel ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
+            if (rs.next()) {
+                return rs.getInt("Total");
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. "  + e.getMessage());
+            return 0;
+        }
+    }
 
 
 
