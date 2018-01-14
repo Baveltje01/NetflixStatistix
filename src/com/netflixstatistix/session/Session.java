@@ -9,7 +9,6 @@ public class Session {
     private DatabaseInterface di = new DatabaseInterface();
 
 
-
     // Initial Variables
     private int abonneeID = 1215426;
     private String abonneeEmail;
@@ -22,6 +21,7 @@ public class Session {
 
     private String[] profielArray;
     private String profielNaam;
+    private String profielGeboortedatum;
 
 
 
@@ -38,6 +38,7 @@ public class Session {
 
         this.profielArray = di.getProfielenFromAbonnee(abonneeID);
         this.profielNaam = profielArray[0];
+        this.profielGeboortedatum = di.getDateOfBirthFromProfile(this.profielNaam, this.abonneeID);
         DatabaseConnection.disconnect();
     }
     public int getAbonneeID() {
@@ -118,5 +119,13 @@ public class Session {
 
     public void setProfielNaam(String profielNaam) {
         this.profielNaam = profielNaam;
+    }
+
+    public String getProfielGeboortedatum() {
+        return profielGeboortedatum;
+    }
+
+    public void setProfielGeboortedatum(String profielGeboortedatum) {
+        this.profielGeboortedatum = profielGeboortedatum;
     }
 }

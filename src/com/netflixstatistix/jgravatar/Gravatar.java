@@ -20,7 +20,7 @@ public final class Gravatar {
 
 	private int size = DEFAULT_SIZE;
 	private GravatarRating rating = DEFAULT_RATING;
-	private GravatarDefaultImage defaultImage = DEFAULT_DEFAULT_IMAGE;
+	private GravatarDefaultImage defaultImage = GravatarDefaultImage.IDENTICON;
 
 	/**
 	 * Specify a gravatar size between 1 and 512 pixels. If you omit this, a

@@ -78,7 +78,7 @@ public class UIHandler {
 
         //Grabbing subscriber-gravatar image
         gravatar.setSize(150);
-        byte[] gravatarByte = gravatar.download("basvanrooten@me.com");                                                                                      // FIXFIXFIXFIX
+        byte[] gravatarByte = gravatar.download(profielEmail);                                                                                      // FIXFIXFIXFIX
         JLabel gravatarImage = new JLabel(new ImageIcon(gravatarByte));
         userSubContainer.add(gravatarImage, BorderLayout.NORTH);
 
