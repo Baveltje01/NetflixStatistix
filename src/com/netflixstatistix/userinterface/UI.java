@@ -68,6 +68,7 @@ public class UI implements Runnable{
         pane.setLayout(new BorderLayout());
 
 
+<<<<<<< HEAD
 //MENU
         // build the menu bar container
         JMenuBar topMenuBar = new JMenuBar();
@@ -242,6 +243,11 @@ public class UI implements Runnable{
         showSubContainer.add(show8, gbc2);
         showSubContainer.add(show9, gbc2);
         showSubContainer.add(show10, gbc2);
+=======
+
+
+        pane.add(uih.createDetails(1001), BorderLayout.CENTER);
+>>>>>>> parent of 2be30d7... Added Session
 
 
         JPanel westContainer = new JPanel(new BorderLayout());
