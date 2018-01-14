@@ -292,7 +292,7 @@ public class DatabaseInterface {
                 return "Geen account gevonden";
             }
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching top account, " + e.getMessage());
             return "Error fetching top account";
         }
     }
@@ -308,8 +308,7 @@ public class DatabaseInterface {
             return lastViewedMoviesAndSeries;
 
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
-            String[] array2 = new String[0];
+            System.out.println("Error fetching top 10 last viewed" + e.getMessage());
             ArrayList<String> errorArray = new ArrayList<String>();
             errorArray.add("Error fetching top 10 last viewed");
             return errorArray;
@@ -329,7 +328,7 @@ public class DatabaseInterface {
             return array;
 
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching list of account names, " + e.getMessage());
             String[] array2 = new String[0];
             Arrays.fill(array2, "Error fetching list of account names");
             return array2;
@@ -349,7 +348,7 @@ public class DatabaseInterface {
             return array;
 
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching list of profile names, " + e.getMessage());
             String[] array2 = new String[0];
             Arrays.fill(array2, "Error fetching list of profile names");
             return array2;
@@ -381,7 +380,7 @@ public class DatabaseInterface {
                 return "Geen Email gevonden";
             }
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching Email from Account, " + e.getMessage());
             return "Error fetching Email from Account";
         }
     }
@@ -396,7 +395,7 @@ public class DatabaseInterface {
                 return "Geen Wachtwoord gevonden";
             }
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching Password from Account, " + e.getMessage());
             return "Error fetching Password from Account";
         }
     }
@@ -411,7 +410,7 @@ public class DatabaseInterface {
                 return "Geen Naam gevonden";
             }
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching Name from Account, " + e.getMessage());
             return "Error fetching Name from Account";
         }
     }
@@ -426,7 +425,7 @@ public class DatabaseInterface {
                 return "Geen Straat gevonden";
             }
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching Street from Account, " + e.getMessage());
             return "Error fetching Street from Account";
         }
     }
@@ -441,7 +440,7 @@ public class DatabaseInterface {
                 return "Geen Huisnummer gevonden";
             }
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching HouseNumber from Account, " + e.getMessage());
             return "Error fetching HouseNumber from Account";
         }
     }
@@ -456,7 +455,7 @@ public class DatabaseInterface {
                 return "Geen Postcode gevonden";
             }
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching Zip code from Account, " + e.getMessage());
             return "Error fetching Zip code from Account";
         }
     }
@@ -471,7 +470,7 @@ public class DatabaseInterface {
                 return "Geen Woonplaats gevonden";
             }
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching City from Account, " + e.getMessage());
             return "Error fetching City from Account";
         }
     }
@@ -486,7 +485,7 @@ public class DatabaseInterface {
                 return "Geen Naam gevonden";
             }
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching Name from Profile, " + e.getMessage());
             return "Error fetching Name from Profile";
         }
     }
@@ -501,7 +500,7 @@ public class DatabaseInterface {
                 return "Geen Geboortedatum gevonden";
             }
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching Date of Birth from Profile, " + e.getMessage());
             return "Error fetching Date of Birth from Profile";
         }
     }
@@ -516,7 +515,7 @@ public class DatabaseInterface {
                 return "Geen AbonneeNaam gevonden";
             }
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching attached AbonneeNaam from Profile, " + e.getMessage());
             return "Error fetching attached AbonneeNaam from Profile";
         }
     }
@@ -531,7 +530,7 @@ public class DatabaseInterface {
                 return "Geen AbonneeID gevonden";
             }
         } catch (Exception e) {
-            System.out.println("An Error Occurred.. " + e.getMessage());
+            System.out.println("Error fetching attached AbonneeID from Profile, " + e.getMessage());
             return "Error fetching attached AbonneeID from Profile";
         }
     }
