@@ -78,7 +78,7 @@ public class UIHandler {
 
         aboutItemMenu.addActionListener(new ActionListener() {                                                              // NEW WINDOW OPENS ON PRESSING 'aboutItemMenu'
             public void actionPerformed(ActionEvent e){
-                AboutInterface openAboutItemMenu = new AboutInterface("Account selectie");
+                AboutInterface openAboutItemMenu = new AboutInterface("Over deze app");
             }
         });
 
