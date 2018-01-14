@@ -297,23 +297,22 @@ public class DatabaseInterface {
         }
     }
 
-    // (String[]) GET TOP 10 LAST VIEWED MOVIES AND EPISODES FROM PROFILE
-    public String[] getTopTenLastViewedMoviesAndSeries(String Profielnaam, int AbonneeID) {
+    // (ArrayList<String>) GET TOP 10 LAST VIEWED MOVIES AND EPISODES FROM PROFILE
+    public ArrayList<String> getTopTenLastViewedMoviesAndSeries(String Profielnaam, int AbonneeID) {
         try {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT TOP 10 BekekenProgramma.Titel AS LaatstBekeken FROM BekekenProgramma WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.AbonneeID = '" + AbonneeID + "' ORDER BY BekekenProgramma.LaatstBekeken DESC;");
             ArrayList<String> lastViewedMoviesAndSeries = new ArrayList<String>();
             while (rs.next()) {
                 lastViewedMoviesAndSeries.add(rs.getString("LaatstBekeken"));
             }
-            String[] array = new String[lastViewedMoviesAndSeries.size()];
-            array = lastViewedMoviesAndSeries.toArray(array);
-            return array;
+            return lastViewedMoviesAndSeries;
 
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
             String[] array2 = new String[0];
-            Arrays.fill(array2, "Error fetching top 10 last viewed");
-            return array2;
+            ArrayList<String> errorArray = new ArrayList<String>();
+            errorArray.add("Error fetching top 10 last viewed");
+            return errorArray;
         }
     }
 
