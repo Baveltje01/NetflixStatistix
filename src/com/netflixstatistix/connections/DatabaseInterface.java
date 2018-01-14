@@ -12,9 +12,9 @@ public class DatabaseInterface {
 
 
     // (INT) GET WATCH TIME
-    public int getWatchTime(int ProgrammaID, String Profielnaam, String Geboortedatum) {
+    public int getWatchTime(int ProgrammaID, String Profielnaam, int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Percentage FROM BekekenProgramma WHERE ProgrammaID = '" + ProgrammaID + "' AND Profielnaam = '" + Profielnaam + "' AND Geboortedatum = '" + Geboortedatum + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Percentage FROM BekekenProgramma WHERE ProgrammaID = '" + ProgrammaID + "' AND Profielnaam = '" + Profielnaam + "' AND AbonneeID = '" + AbonneeID + "';");
             if (rs.next()) {
                 return rs.getInt("Percentage");
             } else {
@@ -80,7 +80,7 @@ public class DatabaseInterface {
     // (String[]) GET ALL MOVIES VIEWED BY SINGLE ACCOUNT(via AbonneeID)
     public String[] getAllMoviesViewedByAccount(int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Film.Titel FROM Film JOIN Programma ON Film.ProgrammaID = Programma.ProgrammaID JOIN BekekenProgramma ON Programma.ProgrammaID = BekekenProgramma.ProgrammaID JOIN Profiel ON Profiel.Profielnaam = BekekenProgramma.Profielnaam AND Profiel.Geboortedatum = BekekenProgramma.Geboortedatum JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '" + AbonneeID + "'");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Film.Titel FROM Film JOIN Programma ON Film.ProgrammaID = Programma.ProgrammaID JOIN BekekenProgramma ON Programma.ProgrammaID = BekekenProgramma.ProgrammaID JOIN Profiel ON Profiel.Profielnaam = BekekenProgramma.Profielnaam AND Profiel.AbonneeID = BekekenProgramma.AbonneeID JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '" + AbonneeID + "'");
             ArrayList<String> moviesViewedByAccount = new ArrayList<String>();
             while (rs.next()) {
                 moviesViewedByAccount.add(rs.getString("Profielnaam"));
@@ -215,7 +215,7 @@ public class DatabaseInterface {
         }
     }
 
-    // ADD PROFILE TO ACCOUNT (Profielnaam + Geboortedatum = Composite PK. ProfielID = FK to Abonnee.AbonneeID)
+    // ADD PROFILE TO ACCOUNT (Profielnaam + AbonneeID = Composite PK. ProfielID = FK to Abonnee.AbonneeID)
     public void addProfile (String Profielnaam, String Geboortedatum, int AbonneeID) {
         try {
             rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO Profiel (Profielnaam,Geboortedatum,AbonneeID) VALUES ('" + Profielnaam + "','" + Geboortedatum + "','" + AbonneeID + "');");
@@ -225,54 +225,54 @@ public class DatabaseInterface {
     }
 
     // DELETE PROFILE FROM ACCOUNT
-    public void deleteProfile (String Profielnaam, String Geboortedatum) {
+    public void deleteProfile (String Profielnaam, int AbonneeID) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("DELETE FROM Profiel WHERE Profiel.Profielnaam = '" + Profielnaam + "' AND Profiel.Geboortedatum = '" + Geboortedatum + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("DELETE FROM Profiel WHERE Profiel.Profielnaam = '" + Profielnaam + "' AND Profiel.AbonneeID = '" + AbonneeID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
     }
 
     // PROFILE NAME ADJUST
-    public void changeProfileName (String nieuweProfielnaam, String oudeProfielnaam, String Geboortedatum) {
+    public void changeProfileName (String nieuweProfielnaam, String oudeProfielnaam, int AbonneeID) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Profiel.Profielnaam = '" + nieuweProfielnaam + "' WHERE  Profiel.Profielnaam = '" + oudeProfielnaam + "' AND Profiel.Geboortedatum = '" + Geboortedatum + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Profiel.Profielnaam = '" + nieuweProfielnaam + "' WHERE  Profiel.Profielnaam = '" + oudeProfielnaam + "' AND Profiel.AbonneeID = '" + AbonneeID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
     }
 
     // PROFILE DATE OF BIRTH ADJUST
-    public void changeProfileDateOfBirth (String nieuweGeboortedatum, String Profielnaam, String oudeGeboortedatum) {
+    public void changeProfileDateOfBirth (String nieuweGeboortedatum, String Profielnaam, int AbonneeID) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Profiel.Geboortedatum = '" + nieuweGeboortedatum + "' WHERE  Profiel.Profielnaam = '" + Profielnaam + "' AND Profiel.Geboortedatum = '" + oudeGeboortedatum + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Profiel.Geboortedatum = '" + nieuweGeboortedatum + "' WHERE  Profiel.Profielnaam = '" + Profielnaam + "' AND Profiel.AbonneeID = '" + AbonneeID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
     }
 
     // ADD VIEWED PROGRAM
-    public void addWatchedProgram (int Percentage, String Profielnaam, String Geboortedatum, int ProgrammaID, String Titel) {
+    public void addWatchedProgram (int Percentage, String Profielnaam, int AbonneeID, int ProgrammaID, String Titel) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO BekekenProgramma(Percentage,Profielnaam,Geboortedatum,ProgrammaID,Titel,LaatstBekeken) VALUES ('" + Percentage + "','" + Profielnaam + "','" + Geboortedatum + "','" + ProgrammaID + "','" + Titel + "','" + LocalDateTime.now() + "');");
+            rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO BekekenProgramma(Percentage,Profielnaam,AbonneeID,ProgrammaID,Titel,LaatstBekeken) VALUES ('" + Percentage + "','" + Profielnaam + "','" + AbonneeID + "','" + ProgrammaID + "','" + Titel + "','" + LocalDateTime.now() + "');");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
     }
 
     // DELETE VIEWED PROGRAM
-    public void deleteWatchedProgram (String Profielnaam, String Geboortedatum, int ProgrammaID) {
+    public void deleteWatchedProgram (String Profielnaam, int AbonneeID, int ProgrammaID) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("DELETE FROM BekekenProgramma WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.Geboortedatum = '" + Geboortedatum + " AND BekekenProgramma.ProgrammaID = '" + ProgrammaID + "'';");
+            rs = DatabaseConnection.giveStatementAndGetResult("DELETE FROM BekekenProgramma WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.AbonneeID = '" + AbonneeID + " AND BekekenProgramma.ProgrammaID = '" + ProgrammaID + "'';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
     }
 
     // ADJUST PERCENTAGE VIEWED OF VIEWED PROGRAM AND LAST VIEWED MOMENT TO CURRENT TIMESTAMP
-    public void adjustWatchedPercentage (int NieuwPercentage, String Profielnaam, String Geboortedatum, int ProgrammaID) {
+    public void adjustWatchedPercentage (int NieuwPercentage, String Profielnaam, int AbonneeID, int ProgrammaID) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE BekekenProgramma SET BekekenProgramma.Percentage = '" + NieuwPercentage + "' WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.Geboortedatum = '" + Geboortedatum + " AND BekekenProgramma.ProgrammaID = '" + ProgrammaID + "''; UPDATE BekekenProgramma SET BekekenProgramma.LaatstBekeken = '" + LocalDateTime.now() + "' WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.Geboortedatum = '" + Geboortedatum + " AND BekekenProgramma.ProgrammaID = '" + ProgrammaID + "'';");
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE BekekenProgramma SET BekekenProgramma.Percentage = '" + NieuwPercentage + "' WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.AbonneeID = '" + AbonneeID + " AND BekekenProgramma.ProgrammaID = '" + ProgrammaID + "''; UPDATE BekekenProgramma SET BekekenProgramma.LaatstBekeken = '" + LocalDateTime.now() + "' WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.AbonneeID = '" + AbonneeID + " AND BekekenProgramma.ProgrammaID = '" + ProgrammaID + "'';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
@@ -294,9 +294,9 @@ public class DatabaseInterface {
     }
 
     // (String[]) GET TOP 10 LAST VIEWED MOVIES AND EPISODES FROM PROFILE
-    public String[] getTopTenLastViewedMoviesAndSeries(String Profielnaam, String Geboortedatum) {
+    public String[] getTopTenLastViewedMoviesAndSeries(String Profielnaam, int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT TOP 10 BekekenProgramma.Titel FROM BekekenProgramma WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.Geboortedatum = '" + Geboortedatum + "' ORDER BY BekekenProgramma.LaatstBekeken DESC;");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT TOP 10 BekekenProgramma.Titel FROM BekekenProgramma WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.AbonneeID = '" + AbonneeID + "' ORDER BY BekekenProgramma.LaatstBekeken DESC;");
             ArrayList<String> lastViewedMoviesAndSeries = new ArrayList<String>();
             while (rs.next()) {
                 lastViewedMoviesAndSeries.add(rs.getString("Laatst bekeken films en afleveringen"));
@@ -474,9 +474,9 @@ public class DatabaseInterface {
     }
 
     // (STRING) GET NAME FROM PROFILE
-    public String getNameFromProfile(String Profielnaam, String Geboortedatum) {
+    public String getNameFromProfile(String Profielnaam, int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profielnaam FROM Profiel WHERE Profielnaam = '" + Profielnaam + "' AND Geboortedatum = '" + Geboortedatum + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profielnaam FROM Profiel WHERE Profielnaam = '" + Profielnaam + "' AND AbonneeID = '" + AbonneeID + "';");
             if (rs.next()) {
                 return rs.getString("Naam");
             } else {
@@ -489,9 +489,9 @@ public class DatabaseInterface {
     }
 
     // (STRING) GET DATEOFBIRTH FROM PROFILE
-    public String getDateOfBirthFromProfile(String Profielnaam, String Geboortedatum) {
+    public String getDateOfBirthFromProfile(String Profielnaam, int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Geboortedatum FROM Profiel WHERE Profielnaam = '" + Profielnaam + "' AND Geboortedatum = '" + Geboortedatum + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Geboortedatum FROM Profiel WHERE Profielnaam = '" + Profielnaam + "' AND AbonneeID = '" + AbonneeID + "';");
             if (rs.next()) {
                 return rs.getString("Geboortedatum");
             } else {
@@ -504,9 +504,9 @@ public class DatabaseInterface {
     }
 
     // (STRING) GET ATTACHED ACCOUNT NAME FROM PROFILE
-    public String getAttachedAccountNameFromProfile(String Profielnaam, String Geboortedatum) {
+    public String getAttachedAccountNameFromProfile(String Profielnaam, int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.Naam FROM Profiel JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Profielnaam = '" + Profielnaam + "' AND Geboortedatum = '" + Geboortedatum + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.Naam FROM Profiel JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Profielnaam = '" + Profielnaam + "' AND AbonneeID = '" + AbonneeID + "';");
             if (rs.next()) {
                 return rs.getString("AbonneeNaam");
             } else {
@@ -519,9 +519,9 @@ public class DatabaseInterface {
     }
 
     // (STRING) GET ATTACHED ACCOUNT ID FROM PROFILE
-    public String getAttachedAccountIDFromProfile(String Profielnaam, String Geboortedatum) {
+    public String getAttachedAccountIDFromProfile(String Profielnaam, int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.AbonneeID FROM Profiel JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Profielnaam = '" + Profielnaam + "' AND Geboortedatum = '" + Geboortedatum + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.AbonneeID FROM Profiel JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Profielnaam = '" + Profielnaam + "' AND AbonneeID = '" + AbonneeID + "';");
             if (rs.next()) {
                 return rs.getString("AbonneeID");
             } else {
@@ -532,21 +532,5 @@ public class DatabaseInterface {
             return "Error fetching attached AbonneeID from Profile";
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
