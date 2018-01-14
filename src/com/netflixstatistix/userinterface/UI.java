@@ -50,7 +50,7 @@ public class UI implements Runnable{
 
         // Adding WestContainer
         westContainer.add(uih.createLeftProfileMenu(session.getAbonneeID(), session.getProfielNaam(), session.getAbonneeEmail()), BorderLayout.NORTH);
-        westContainer.add(uih.createShowSelector("Frank"), BorderLayout.SOUTH);
+        westContainer.add(uih.createShowSelector(session.getProfielNaam(), session.getLatestVideoTitleArray()), BorderLayout.SOUTH);
         pane.add(westContainer, BorderLayout.WEST);
 
         // Credits Footer

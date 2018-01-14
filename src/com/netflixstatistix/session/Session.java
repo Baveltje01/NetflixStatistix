@@ -23,6 +23,9 @@ public class Session {
     private String profielNaam;
     private String profielGeboortedatum;
 
+    // Video Statistics
+    private String[] latestVideoTitleArray;
+
 
 
     public Session() {
@@ -39,6 +42,12 @@ public class Session {
         this.profielArray = di.getProfielenFromAbonnee(abonneeID);
         this.profielNaam = profielArray[0];
         this.profielGeboortedatum = di.getDateOfBirthFromProfile(this.profielNaam, this.abonneeID);
+
+        this.latestVideoTitleArray = di.getTopTenLastViewedMoviesAndSeries(this.profielNaam, this.abonneeID);
+
+
+
+
         DatabaseConnection.disconnect();
     }
     public int getAbonneeID() {
@@ -127,5 +136,13 @@ public class Session {
 
     public void setProfielGeboortedatum(String profielGeboortedatum) {
         this.profielGeboortedatum = profielGeboortedatum;
+    }
+
+    public String[] getLatestVideoTitleArray() {
+        return latestVideoTitleArray;
+    }
+
+    public void setLatestVideoTitleArray(String[] latestVideoTitleArray) {
+        this.latestVideoTitleArray = latestVideoTitleArray;
     }
 }

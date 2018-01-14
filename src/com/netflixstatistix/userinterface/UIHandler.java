@@ -110,7 +110,7 @@ public class UIHandler {
         return creditsContainer;
     }
 
-    public JPanel createShowSelector(String profielNaam) {
+    public JPanel createShowSelector(String profielNaam, String[] latestVideoTitleArray) {
 
         DatabaseConnection.connect();
 
