@@ -218,7 +218,11 @@ public class DatabaseInterface {
     // ADD PROFILE TO ACCOUNT (Profielnaam + AbonneeID = Composite PK. ProfielID = FK to Abonnee.AbonneeID)
     public void addProfile (String Profielnaam, String Geboortedatum, int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO Profiel (Profielnaam,Geboortedatum,AbonneeID) VALUES ('" + Profielnaam + "','" + Geboortedatum + "','" + AbonneeID + "');");
+            if(getAmountOfProfilesOnAccount(AbonneeID) < 5){
+                rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO Profiel (Profielnaam,Geboortedatum,AbonneeID) VALUES ('" + Profielnaam + "','" + Geboortedatum + "','" + AbonneeID + "');");
+            } else {
+                System.out.println("Profile cannot be added. Max number of profiles on account " + AbonneeID + " reached.");
+            }
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
@@ -532,5 +536,8 @@ public class DatabaseInterface {
             return "Error fetching attached AbonneeID from Profile";
         }
     }
+
+
+
 }
 
