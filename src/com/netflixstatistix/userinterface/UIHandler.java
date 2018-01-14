@@ -12,11 +12,12 @@ package com.netflixstatistix.userinterface;
         import com.netflixstatistix.connections.DatabaseConnection;
         import com.netflixstatistix.connections.DatabaseInterface;
         import com.netflixstatistix.jgravatar.*;
+        import com.netflixstatistix.session.CurrentSession;
         import com.netflixstatistix.session.Session;
         import com.netflixstatistix.userinterface.about.AboutInterface;
         import com.netflixstatistix.userinterface.accountselection.AccountInterface;
 
-public class UIHandler {
+public class UIHandler extends CurrentSession {
 
 
     // GLOBAL DECLARATIONS

@@ -5,12 +5,12 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 import com.netflixstatistix.connections.DatabaseInterface;
+import com.netflixstatistix.session.CurrentSession;
 import com.netflixstatistix.session.Session;
 
-public class UI implements Runnable{
+public class UI extends CurrentSession implements Runnable {
 
     // Initializing different classes
-    public Session session = new Session();
     public DatabaseInterface di = new DatabaseInterface();
     public UIHandler uih = new UIHandler();
 
