@@ -11,7 +11,6 @@ public class AccountContentPanel extends JPanel{
         Dimension size = getPreferredSize();
         size.width = 250;
         setPreferredSize(size);
-        setBorder(BorderFactory.createTitledBorder("Abonnee selectie"));
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
 
