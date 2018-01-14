@@ -16,6 +16,8 @@ package com.netflixstatistix.userinterface;
         import com.netflixstatistix.userinterface.about.AboutInterface;
         import com.netflixstatistix.userinterface.accountselection.AccountInterface;
 
+        import static java.awt.GridBagConstraints.FIRST_LINE_START;
+
 public class UIHandler {
 
 
@@ -171,11 +173,77 @@ public class UIHandler {
         centerContainer.setBorder(new EmptyBorder(10,10,10,10));
 
         GridBagConstraints gbc1 = new GridBagConstraints();
-
+        gbc1.fill = GridBagConstraints.HORIZONTAL;
         JLabel detailTitle = new JLabel("Details van " + movieName, JLabel.CENTER);            // TESTING SETTING
         detailTitle.setFont(new Font("Arial", Font.BOLD, 20));
+
+        JButton functie1 = new JButton("Functie1");
+        JButton functie2 = new JButton("Functie2");
+        JButton functie3 = new JButton("Functie3");
+        JButton functie4 = new JButton("Functie4");
+        JButton functie5 = new JButton("Functie5");
+        JButton functie6 = new JButton("Functie6");
+        JInternalFrame frame1 = new JInternalFrame("Testframe 1");
+        JTextField textField1 = new JTextField("Testtextfield 1");
+
+        textField1.setSize(200,200);
+        textField1.setVisible(true);
+
+        frame1.setSize(200,100);
+        frame1.setVisible(true);
+
+        functie1.addActionListener(new ActionListener() {                                                              // NEW WINDOW OPENS ON PRESSING 'aboutItemMenu'
+            public void actionPerformed(ActionEvent e){
+                centerContainer.removeAll();
+                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
+                gbc1.gridx = 0;
+                gbc1.gridy = 0;
+                centerContainer.add(functie1,gbc1);
+
+                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
+                gbc1.gridx = 1;
+                gbc1.gridy = 0;
+                centerContainer.add(functie2,gbc1);
+
+                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
+                gbc1.gridx = 2;
+                gbc1.gridy = 0;
+                centerContainer.add(functie3,gbc1);
+
+                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
+                gbc1.gridx = 3;
+                gbc1.gridy = 0;
+                centerContainer.add(functie4,gbc1);
+
+                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
+                gbc1.gridx = 4;
+                gbc1.gridy = 0;
+                centerContainer.add(functie5,gbc1);
+
+                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
+                gbc1.gridx = 5;
+                gbc1.gridy = 0;
+                centerContainer.add(functie6,gbc1);
+
+                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
+                gbc1.gridx = 0;
+                gbc1.gridy = 1;
+                centerContainer.add(frame1,gbc1);
+
+                centerContainer.revalidate();
+                centerContainer.repaint();
+            }
+        });
+
+
+
+        gbc1.gridx = 1;
+        gbc1.gridy = 0;
+        centerContainer.add(functie1);
+
+
         gbc1.gridx = 0;
-        gbc1.gridy = 1;
+        gbc1.gridy = 2;
 
         centerContainer.add(detailTitle, gbc1);
 
@@ -208,7 +276,7 @@ public class UIHandler {
         table.setEnabled(false);
 
         gbc1.gridx = 0;
-        gbc1.gridy = 2;
+        gbc1.gridy = 3;
         centerContainer.add(new JScrollPane(table), gbc1);
 
         DatabaseConnection.disconnect();
