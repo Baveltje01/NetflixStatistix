@@ -11,14 +11,19 @@ public class UI implements Runnable{
 
     // Initializing different classes
     public Session session = new Session();
-    private DatabaseInterface di = new DatabaseInterface();
-    private UIHandler uih = new UIHandler();
+    public DatabaseInterface di = new DatabaseInterface();
+    public UIHandler uih = new UIHandler();
 
     // Variables for easy configuration
-    private Border grey = BorderFactory.createLineBorder(Color.lightGray);
+    public Border grey = BorderFactory.createLineBorder(Color.lightGray);
 
     // Creating JFrame which acts as main container.
-    private JFrame frame;
+    public JFrame frame;
+    public Container pane;
+    public JPanel westContainer;
+
+    public JPanel createLeftProfileMenu;
+
 
     @Override
     public void run() {
@@ -34,7 +39,7 @@ public class UI implements Runnable{
     }
 
     private void createComponents(Container container) {
-        Container pane = frame.getContentPane();
+        pane = frame.getContentPane();
         pane.setLayout(new BorderLayout());
 
         frame.setJMenuBar(uih.mainMenu());
@@ -44,11 +49,13 @@ public class UI implements Runnable{
         pane.add(uih.createDetails(1001, "Test"), BorderLayout.CENTER);
 
 
-        JPanel westContainer = new JPanel(new BorderLayout());
+        westContainer = new JPanel(new BorderLayout());
         westContainer.setBorder(grey);
 
         // Adding WestContainer
-        westContainer.add(uih.createLeftProfileMenu(session.getAbonneeID(), session.getProfielNaam(), session.getAbonneeEmail()), BorderLayout.NORTH);
+
+        createLeftProfileMenu = uih.createLeftProfileMenu(session.getAbonneeID(), session.getProfielNaam(), session.getAbonneeEmail());
+        westContainer.add(createLeftProfileMenu, BorderLayout.NORTH);
         westContainer.add(uih.createShowSelector(session.getProfielNaam(), session.getLatestVideoTitleArray()), BorderLayout.SOUTH);
         pane.add(westContainer, BorderLayout.WEST);
 
