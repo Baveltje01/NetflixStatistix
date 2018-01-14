@@ -19,6 +19,9 @@ public class UI implements Runnable{
     // Variables for easy configuration
     private Border grey = BorderFactory.createLineBorder(Color.lightGray);
 
+
+
+
     // Creating JFrame which acts as main container.
     private JFrame frame;
 
@@ -40,8 +43,6 @@ public class UI implements Runnable{
         pane.setLayout(new BorderLayout());
 
         frame.setJMenuBar(uih.mainMenu());
-
-
 
         pane.add(uih.createDetails(1001), BorderLayout.CENTER);
 

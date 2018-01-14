@@ -61,6 +61,21 @@ public class DatabaseInterface {
         }
     }
 
+    // (String[]) GET PROFIELEN FROM ABONNEE
+    public String getOneProfielFromAbonnee(int profielID) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT TOP 1 Profielnaam FROM Profiel WHERE ProfielID = '" + profielID + "';");
+            if (rs.next()) {
+                return rs.getString("Profielnaam");
+            } else {
+                return "ERROR Profielnaam";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "ERROR Profielnaam";
+        }
+    }
+
     // (STRING) GET LONGEST MOVIE BY MAX AGE -> age
     public String getLongestMovieByMaxAge(int age) {
         try {
