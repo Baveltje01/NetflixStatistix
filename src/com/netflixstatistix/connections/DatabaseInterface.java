@@ -368,6 +368,173 @@ public class DatabaseInterface {
         }
     }
 
+    // (STRING) GET EMAIL FROM ACCOUNT
+    public String getEmailFromAccount(int AbonneeID) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Email FROM Abonnee WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
+            if (rs.next()) {
+                return rs.getString("Email");
+            } else {
+                return "Geen Email gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "Error fetching Email from Account";
+        }
+    }
+
+    // (STRING) GET PASSWORD FROM ACCOUNT
+    public String getPasswordFromAccount(int AbonneeID) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Wachtwoord FROM Abonnee WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
+            if (rs.next()) {
+                return rs.getString("Wachtwoord");
+            } else {
+                return "Geen Wachtwoord gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "Error fetching Password from Account";
+        }
+    }
+
+    // (STRING) GET NAME FROM ACCOUNT
+    public String getNameFromAccount(int AbonneeID) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Naam FROM Abonnee WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
+            if (rs.next()) {
+                return rs.getString("Naam");
+            } else {
+                return "Geen Naam gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "Error fetching Name from Account";
+        }
+    }
+
+    // (STRING) GET STREET FROM ACCOUNT
+    public String getStreetFromAccount(int AbonneeID) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Straat FROM Abonnee WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
+            if (rs.next()) {
+                return rs.getString("Straat");
+            } else {
+                return "Geen Straat gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "Error fetching Street from Account";
+        }
+    }
+
+    // (STRING) GET HOUSENUMBER FROM ACCOUNT
+    public String getHouseNumberFromAccount(int AbonneeID) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Huisnummer FROM Abonnee WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
+            if (rs.next()) {
+                return rs.getString("Huisnummer");
+            } else {
+                return "Geen Huisnummer gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "Error fetching HouseNumber from Account";
+        }
+    }
+
+    // (STRING) GET ZIPCODE FROM ACCOUNT
+    public String getZipCodeFromAccount(int AbonneeID) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Postcode FROM Abonnee WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
+            if (rs.next()) {
+                return rs.getString("Postcode");
+            } else {
+                return "Geen Postcode gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "Error fetching Zip code from Account";
+        }
+    }
+
+    // (STRING) GET CITY FROM ACCOUNT
+    public String getCityFromAccount(int AbonneeID) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Woonplaats FROM Abonnee WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
+            if (rs.next()) {
+                return rs.getString("Woonplaats");
+            } else {
+                return "Geen Woonplaats gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "Error fetching City from Account";
+        }
+    }
+
+    // (STRING) GET NAME FROM PROFILE
+    public String getNameFromProfile(String Profielnaam, String Geboortedatum) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profielnaam FROM Profiel WHERE Profielnaam = '" + Profielnaam + "' AND Geboortedatum = '" + Geboortedatum + "';");
+            if (rs.next()) {
+                return rs.getString("Naam");
+            } else {
+                return "Geen Naam gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "Error fetching Name from Profile";
+        }
+    }
+
+    // (STRING) GET DATEOFBIRTH FROM PROFILE
+    public String getDateOfBirthFromProfile(String Profielnaam, String Geboortedatum) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Geboortedatum FROM Profiel WHERE Profielnaam = '" + Profielnaam + "' AND Geboortedatum = '" + Geboortedatum + "';");
+            if (rs.next()) {
+                return rs.getString("Geboortedatum");
+            } else {
+                return "Geen Geboortedatum gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "Error fetching Date of Birth from Profile";
+        }
+    }
+
+    // (STRING) GET ATTACHED ACCOUNT NAME FROM PROFILE
+    public String getAttachedAccountNameFromProfile(String Profielnaam, String Geboortedatum) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.Naam FROM Profiel JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Profielnaam = '" + Profielnaam + "' AND Geboortedatum = '" + Geboortedatum + "';");
+            if (rs.next()) {
+                return rs.getString("AbonneeNaam");
+            } else {
+                return "Geen AbonneeNaam gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "Error fetching attached AbonneeNaam from Profile";
+        }
+    }
+
+    // (STRING) GET ATTACHED ACCOUNT ID FROM PROFILE
+    public String getAttachedAccountIDFromProfile(String Profielnaam, String Geboortedatum) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.AbonneeID FROM Profiel JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Profielnaam = '" + Profielnaam + "' AND Geboortedatum = '" + Geboortedatum + "';");
+            if (rs.next()) {
+                return rs.getString("AbonneeID");
+            } else {
+                return "Geen AbonneeID gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "Error fetching attached AbonneeID from Profile";
+        }
+    }
+
+
+
 
 
 
