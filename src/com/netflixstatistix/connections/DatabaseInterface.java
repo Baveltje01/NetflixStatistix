@@ -277,6 +277,23 @@ public class DatabaseInterface {
         }
     }
 
+    // SELECT TOP 1 ACCOUNT (FOR STARTING REFERENCE)
+    public String getTopAccount() {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT TOP 1 Abonnee.Naam FROM Abonnee;");
+            if (rs.next()) {
+                return rs.getString("Top 1 account");
+            } else {
+                return "Geen account gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return "Error fetching top account";
+        }
+    }
+
+    
+
 
 
 
