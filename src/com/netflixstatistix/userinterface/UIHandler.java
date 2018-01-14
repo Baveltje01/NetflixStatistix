@@ -66,12 +66,12 @@ public class UIHandler {
         return topMenuBar;
     }
 
-    public JPanel createLeftProfileMenu(int profielID) {
+    public JPanel createLeftProfileMenu(int AbonneeID) {
         DatabaseConnection.connect();
         JPanel leftProfileMenu = new JPanel(new BorderLayout());
 
         JPanel userDropdownContainer = new JPanel(new BorderLayout());
-        JComboBox usersDropdown = new JComboBox(di.getProfielenFromAbonnee(profielID));                                                             // FIXFIXFIXFIX
+        JComboBox usersDropdown = new JComboBox(di.getProfielenFromAbonnee(AbonneeID));                                                             // FIXFIXFIXFIX
         usersDropdown.setSelectedIndex(0);
         userDropdownContainer.add(usersDropdown, BorderLayout.NORTH);
 

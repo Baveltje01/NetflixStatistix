@@ -45,7 +45,7 @@ public class DatabaseInterface {
     // (String[]) GET PROFIELEN FROM ABONNEE
     public String[] getProfielenFromAbonnee(int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profielnaam FROM Profiel JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE AbonneeID = '" + AbonneeID + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profielnaam FROM Profiel JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '" + AbonneeID + "';");
             ArrayList<String> profielen = new ArrayList<String>();
             while (rs.next()) {
                 profielen.add(rs.getString("Profielnaam"));

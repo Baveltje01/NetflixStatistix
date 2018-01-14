@@ -13,7 +13,7 @@ public class Debugger {
         DatabaseInterface di = new DatabaseInterface();
 
         System.out.println(di.getTotalEpisodesInSerie("Sherlock"));
-        System.out.println(di.getWatchTime(1001, "Frank"));
+        System.out.println(di.getWatchTime(1001, "Frank","1968-01-25"));
         System.out.println(di.getLongestMovieByMaxAge(16));
         System.out.println(Arrays.toString(di.getProfielenFromAbonnee(1215426)));
         System.out.println(di.getHowManyViewersViewedThisMovieCompletely("The Life of Brian"));
