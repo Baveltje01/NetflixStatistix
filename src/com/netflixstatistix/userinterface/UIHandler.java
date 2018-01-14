@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 
 import com.netflixstatistix.connections.DatabaseConnection;
@@ -42,7 +43,7 @@ public class UIHandler {
         changeAccountMenuItem = new JMenuItem("Accountgegevens aanpassen");
         accountMenu.add(changeAccountMenuItem);
 
-        changeAccountMenuItem.addActionListener(new ActionListener() {  // NEW WINDOW OPENS ON PRESSING 'changeAccountMenuItem'
+        changeAccountMenuItem.addActionListener(new ActionListener() {                                                      // NEW WINDOW OPENS ON PRESSING 'changeAccountMenuItem'
             public void actionPerformed(ActionEvent e){
                 AccountInterface openAccountMenuItem = new AccountInterface("Account selectie");
             }
@@ -62,10 +63,20 @@ public class UIHandler {
         avansItemMenu = new JMenuItem("Avans website");
         infoMenu.add(avansItemMenu);
 
+        avansItemMenu.addActionListener(new ActionListener() {                                                              // BROWSER WINDOW OPENS AND GOES TO http://www.avans.nl
+            public void actionPerformed(ActionEvent e){
+                try {
+                    Desktop.getDesktop().browse(new URL("http://www.avans.nl").toURI());
+                } catch (Exception z) {
+                    System.out.println("Error opening webpage.");
+                }
+            }
+        });
+
         aboutItemMenu = new JMenuItem("Over deze app");
         infoMenu.add(aboutItemMenu);
 
-        aboutItemMenu.addActionListener(new ActionListener() {  // NEW WINDOW OPENS ON PRESSING 'aboutItemMenu'
+        aboutItemMenu.addActionListener(new ActionListener() {                                                              // NEW WINDOW OPENS ON PRESSING 'aboutItemMenu'
             public void actionPerformed(ActionEvent e){
                 AboutInterface openAboutItemMenu = new AboutInterface("Account selectie");
             }
