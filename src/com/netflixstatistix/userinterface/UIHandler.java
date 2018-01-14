@@ -1,20 +1,20 @@
 package com.netflixstatistix.userinterface;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.URL;
-import java.util.ArrayList;
+        import javax.swing.*;
+        import javax.swing.border.Border;
+        import javax.swing.border.EmptyBorder;
+        import java.awt.*;
+        import java.awt.event.ActionEvent;
+        import java.awt.event.ActionListener;
+        import java.net.URL;
+        import java.util.ArrayList;
 
-import com.netflixstatistix.connections.DatabaseConnection;
-import com.netflixstatistix.connections.DatabaseInterface;
-import com.netflixstatistix.jgravatar.*;
-import com.netflixstatistix.session.Session;
-import com.netflixstatistix.userinterface.about.AboutInterface;
-import com.netflixstatistix.userinterface.accountselection.AccountInterface;
+        import com.netflixstatistix.connections.DatabaseConnection;
+        import com.netflixstatistix.connections.DatabaseInterface;
+        import com.netflixstatistix.jgravatar.*;
+        import com.netflixstatistix.session.Session;
+        import com.netflixstatistix.userinterface.about.AboutInterface;
+        import com.netflixstatistix.userinterface.accountselection.AccountInterface;
 
 public class UIHandler {
 

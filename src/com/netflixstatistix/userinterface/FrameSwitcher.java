@@ -18,8 +18,6 @@ public class FrameSwitcher extends UI implements ActionListener {
         session.setCurrentVideoTitle(button.getText());
         System.out.println(session.getCurrentVideoTitle());
 
-        createLeftProfileMenu.setVisible(false);
-        pane.add(uih.createDetails(1001, session.getCurrentVideoTitle()));
 
 
     }
