@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="326e3830-4839-4716-b1ab-0d1d77c15762" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/netflixstatistix/connections/DatabaseInterface.java" afterPath="$PROJECT_DIR$/src/com/netflixstatistix/connections/DatabaseInterface.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -41,11 +39,11 @@
       <file leaf-file-name="DatabaseInterface.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/netflixstatistix/connections/DatabaseInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="852">
-              <caret line="294" column="4" lean-forward="false" selection-start-line="294" selection-start-column="4" selection-end-line="294" selection-end-column="4" />
+            <state relative-caret-position="790">
+              <caret line="276" column="72" lean-forward="true" selection-start-line="276" selection-start-column="72" selection-end-line="276" selection-end-column="72" />
               <folding>
-                <element signature="e#1622#1630#0" expanded="true" />
-                <element signature="e#3393#3401#0" expanded="true" />
+                <element signature="e#1654#1662#0" expanded="true" />
+                <element signature="e#3425#3433#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -69,10 +67,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding>
-                <element signature="e#191#192#0" expanded="true" />
-                <element signature="e#257#258#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -89,6 +84,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>ArrayList</find>
+      <find>bekeken</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -404,12 +400,12 @@
       <workItem from="1515864065759" duration="594000" />
       <workItem from="1515865711436" duration="511000" />
       <workItem from="1515867784498" duration="443000" />
-      <workItem from="1515923659537" duration="1332000" />
+      <workItem from="1515923659537" duration="2967000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80486000" />
+    <option name="totallyTimeSpent" value="82121000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1294" height="1407" extended-state="0" />
@@ -617,7 +613,7 @@
         <state relative-caret-position="136">
           <caret line="10" column="31" lean-forward="false" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -671,10 +667,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#191#192#0" expanded="true" />
-            <element signature="e#257#258#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -709,11 +702,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/netflixstatistix/connections/DatabaseInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="852">
-          <caret line="294" column="4" lean-forward="false" selection-start-line="294" selection-start-column="4" selection-end-line="294" selection-end-column="4" />
+        <state relative-caret-position="790">
+          <caret line="276" column="72" lean-forward="true" selection-start-line="276" selection-start-column="72" selection-end-line="276" selection-end-column="72" />
           <folding>
-            <element signature="e#1622#1630#0" expanded="true" />
-            <element signature="e#3393#3401#0" expanded="true" />
+            <element signature="e#1654#1662#0" expanded="true" />
+            <element signature="e#3425#3433#0" expanded="true" />
           </folding>
         </state>
       </provider>

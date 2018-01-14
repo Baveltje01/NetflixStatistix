@@ -1,6 +1,7 @@
 package com.netflixstatistix.connections;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -253,7 +254,7 @@ public class DatabaseInterface {
     // ADD VIEWED PROGRAM
     public void addWatchedProgram (int Percentage, String Profielnaam, String Geboortedatum, int ProgrammaID) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO BekekenProgramma(Percentage,Profielnaam,Geboortedatum,ProgrammaID) VALUES ('" + Percentage + "','" + Profielnaam + "','" + Geboortedatum + "','" + ProgrammaID + "');");
+            rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO BekekenProgramma(Percentage,Profielnaam,Geboortedatum,ProgrammaID,LaatstBekeken) VALUES ('" + Percentage + "','" + Profielnaam + "','" + Geboortedatum + "','" + ProgrammaID + "','" + LocalDateTime.now() + "');");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
@@ -268,10 +269,10 @@ public class DatabaseInterface {
         }
     }
 
-    // ADJUST PERCENTAGE VIEWED OF VIEWED PROGRAM
+    // ADJUST PERCENTAGE VIEWED OF VIEWED PROGRAM AND LAST VIEWED MOMENT TO CURRENT TIMESTAMP
     public void adjustWatchedPercentage (int NieuwPercentage, String Profielnaam, String Geboortedatum, int ProgrammaID) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE BekekenProgramma SET BekekenProgramma.Percentage = '" + NieuwPercentage + "' WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.Geboortedatum = '" + Geboortedatum + " AND BekekenProgramma.ProgrammaID = '" + ProgrammaID + "'';");
+            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE BekekenProgramma SET BekekenProgramma.Percentage = '" + NieuwPercentage + "' WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.Geboortedatum = '" + Geboortedatum + " AND BekekenProgramma.ProgrammaID = '" + ProgrammaID + "''; UPDATE BekekenProgramma SET BekekenProgramma.LaatstBekeken = '" + LocalDateTime.now() + "' WHERE BekekenProgramma.Profielnaam = '" + Profielnaam + "' AND BekekenProgramma.Geboortedatum = '" + Geboortedatum + " AND BekekenProgramma.ProgrammaID = '" + ProgrammaID + "'';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
@@ -292,7 +293,8 @@ public class DatabaseInterface {
         }
     }
 
-    
+
+
 
 
 
