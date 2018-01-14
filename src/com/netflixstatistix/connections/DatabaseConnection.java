@@ -37,6 +37,8 @@ public class DatabaseConnection {
     }
 
     public static void disconnect()    {         // cuts off the connection
-        if (connection != null) try { connection.close(); } catch(Exception e)          {/*VUL ACTIE IN*/}
+        if (connection != null) try { connection.close(); } catch(Exception e) {
+            System.out.println("Error ");
+        }
     }
 }
