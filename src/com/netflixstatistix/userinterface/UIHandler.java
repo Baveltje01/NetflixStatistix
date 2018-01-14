@@ -8,6 +8,7 @@ import java.awt.*;
 import com.netflixstatistix.connections.DatabaseConnection;
 import com.netflixstatistix.connections.DatabaseInterface;
 import com.netflixstatistix.jgravatar.*;
+import com.netflixstatistix.session.Session;
 
 public class UIHandler {
 
@@ -18,10 +19,6 @@ public class UIHandler {
     private TimeKeeper timeKeeper = new TimeKeeper();
     private AppDetails appDetails = new AppDetails();
     private Border grey = BorderFactory.createLineBorder(Color.lightGray);
-
-    // TEMPORARY VARIABLES
-    private String user = "Bas";
-    private String movieName = "Stranger Things";
 
     public JMenuBar mainMenu() {
         JMenuBar topMenuBar = new JMenuBar();
@@ -66,12 +63,12 @@ public class UIHandler {
         return topMenuBar;
     }
 
-    public JPanel createLeftProfileMenu(int AbonneeID) {
+    public JPanel createLeftProfileMenu(int abonneeID, String profielNaam, String profielEmail) {
         DatabaseConnection.connect();
         JPanel leftProfileMenu = new JPanel(new BorderLayout());
 
         JPanel userDropdownContainer = new JPanel(new BorderLayout());
-        JComboBox usersDropdown = new JComboBox(di.getProfielenFromAbonnee(AbonneeID));                                                             // FIXFIXFIXFIX
+        JComboBox usersDropdown = new JComboBox(di.getProfielenFromAbonnee(abonneeID));                                                             // FIXFIXFIXFIX
         usersDropdown.setSelectedIndex(0);
         userDropdownContainer.add(usersDropdown, BorderLayout.NORTH);
 
@@ -81,11 +78,11 @@ public class UIHandler {
 
         //Grabbing subscriber-gravatar image
         gravatar.setSize(150);
-        byte[] gravatarByte = gravatar.download("basvanrooten@me.com");
+        byte[] gravatarByte = gravatar.download("basvanrooten@me.com");                                                                                      // FIXFIXFIXFIX
         JLabel gravatarImage = new JLabel(new ImageIcon(gravatarByte));
         userSubContainer.add(gravatarImage, BorderLayout.NORTH);
 
-        JLabel greeting = new JLabel(timeKeeper.greeting() + " " + this.user, JLabel.CENTER);
+        JLabel greeting = new JLabel(timeKeeper.greeting() + " " + profielNaam, JLabel.CENTER);
         greeting.setFont(new Font("Arial", Font.PLAIN, 18));
 
         userSubContainer.add(gravatarImage, BorderLayout.NORTH);
@@ -163,7 +160,7 @@ public class UIHandler {
         return showSubContainer;
     }
 
-    public JPanel createDetails(int ProgrammaID) {
+    public JPanel createDetails(int ProgrammaID, String movieName) {
 
         DatabaseConnection.connect();
 

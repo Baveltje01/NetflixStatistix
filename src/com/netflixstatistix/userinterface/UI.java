@@ -6,13 +6,12 @@ import java.awt.*;
 
 import com.netflixstatistix.connections.DatabaseInterface;
 import com.netflixstatistix.jgravatar.*;
+import com.netflixstatistix.session.Session;
 
 public class UI implements Runnable{
 
     // Initializing different classes
-    private AppDetails appDetails = new AppDetails();
-    private TimeKeeper timeKeeper = new TimeKeeper();
-    private Gravatar gravatar = new Gravatar();
+    private Session session = new Session();
     private DatabaseInterface di = new DatabaseInterface();
     private UIHandler uih = new UIHandler();
 
@@ -43,14 +42,14 @@ public class UI implements Runnable{
 
 
 
-        pane.add(uih.createDetails(1001), BorderLayout.CENTER);
+        pane.add(uih.createDetails(1001, "Test"), BorderLayout.CENTER);
 
 
         JPanel westContainer = new JPanel(new BorderLayout());
         westContainer.setBorder(grey);
 
         // Adding WestContainer
-        westContainer.add(uih.createLeftProfileMenu(1215426), BorderLayout.NORTH);
+        westContainer.add(uih.createLeftProfileMenu(session.getAbonneeID(), session.getProfielNaam(), session.getAbonneeEmail()), BorderLayout.NORTH);
         westContainer.add(uih.createShowSelector("Frank"), BorderLayout.SOUTH);
         pane.add(westContainer, BorderLayout.WEST);
 
