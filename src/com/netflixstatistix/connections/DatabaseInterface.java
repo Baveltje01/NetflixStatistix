@@ -333,7 +333,25 @@ public class DatabaseInterface {
         }
     }
 
+    // GET LIST OF PROFILE NAMES FROM ACCOUNT
+    public String[] getListOfProfilesFromAccount(int AbonneeID) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profiel.Naam FROM Abonnee JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '"  + AbonneeID +  "';");
+            ArrayList<String> listOfProfilesFromAccount = new ArrayList<String>();
+            while (rs.next()) {
+                listOfProfilesFromAccount.add(rs.getString("Lijst van Abonnees"));
+            }
+            String[] array = new String[listOfProfilesFromAccount.size()];
+            array = listOfProfilesFromAccount.toArray(array);
+            return array;
 
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            String[] array2 = new String[0];
+            Arrays.fill(array2, "Error fetching list of profile names");
+            return array2;
+        }
+    }
 
 
 
