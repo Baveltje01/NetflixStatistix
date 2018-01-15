@@ -194,7 +194,7 @@ public class DatabaseInterface {
     // ACCOUNT ADJUST NAME
     public void changeAccountName (int AccountID, String newName) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Naam = '" + newName + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+            DatabaseConnection.giveStatement("UPDATE Abonnee SET Abonnee.Naam = '" + newName + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }

@@ -481,7 +481,7 @@ public class UIHandler extends CurrentSession {
             public void actionPerformed(ActionEvent e){
 
                 internalFrameContainer.removeAll();
-                JInternalFrame frame = new JInternalFrame("Functie 4", false, false, false, false);
+                JInternalFrame frame = new JInternalFrame("Langste film voor kijkers jonger dan 16 jaar", false, false, false, false);
                 frame.setLayout(new GridBagLayout());
 
 
@@ -493,13 +493,15 @@ public class UIHandler extends CurrentSession {
                 gbc.weighty = 0.0;
                 frame.add(textField1, gbc);
 
-                String output = session.getLongestMovieUnder16();
+                DatabaseConnection.connect();
+                ArrayList<String> array = new ArrayList<String>();
+                array.add(di.getLongestMovieUnderSixteen());
+                DatabaseConnection.disconnect();
 
-                JTextField textField2 = new JTextField(output);
-                gbc.gridx = 0;
-                gbc.gridy = 1;
-                gbc.weighty = 1.0;
-                frame.add(textField2, gbc);
+                JList contentField = new JList(new Vector<>(array));
+                contentField.setSize(30,60);
+                gbc.gridy = 3;
+                frame.add(contentField,gbc);
 
 
                 // ADDING frames to internalcontainer
@@ -523,29 +525,27 @@ public class UIHandler extends CurrentSession {
             public void actionPerformed(ActionEvent e){
 
                 internalFrameContainer.removeAll();
-                JInternalFrame frame = new JInternalFrame("Accounts met een enkel Profiel", false, false, false, false);
+                JInternalFrame frame = new JInternalFrame("Abonnees met slechts 1 enkel profiel", false, false, false, false);
                 frame.setLayout(new GridBagLayout());
 
 
                 // UI components and logic for frame
-                JLabel label1 = new JLabel("Hieronder volgen de accounts met slechts 1 enkel profiel");
+                JLabel label1 = new JLabel("Abonnees met slechts 1 enkel profiel");
                 gbc.anchor = GridBagConstraints.NORTH;
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.weighty = 0.0;
                 frame.add(label1, gbc);
                 int i = 0;
-                ArrayList<String> array = session.getAccountsWithOneProfile();
 
-                for (String item : array) {
-                    JTextField textField = new JTextField(item);
-                    gbc.anchor = GridBagConstraints.NORTH;
-                    gbc.gridy = i + 1;
+                DatabaseConnection.connect();
+                ArrayList<String> array = di.getAccountsWithSingleProfile();
+                DatabaseConnection.disconnect();
 
-                    textField.setEnabled(false);
-                    frame.add(textField, gbc);
-                }
-
+                JList contentField = new JList(new Vector<>(array));
+                contentField.setSize(30,60);
+                gbc.gridy = 3;
+                frame.add(contentField,gbc);
 
                 // ADDING frames to internalcontainer
                 internalFrameContainer.add(frame, BorderLayout.CENTER);
@@ -592,7 +592,7 @@ public class UIHandler extends CurrentSession {
                         DatabaseConnection.connect();
 
                         int result = di.getAmountOfPeopleWhoFullyWatchedAMovie(movieList.getSelectedItem().toString());
-                        JTextField output = new JTextField("In totaal hebben " + result + " gebruikers de film compleet gezien.");
+                        JTextField output = new JTextField("In totaal hebben " + result + " gebruiker(s) de film compleet gezien.");
                         gbc.gridy = 2;
                         frame.add(output, gbc);
                         DatabaseConnection.disconnect();

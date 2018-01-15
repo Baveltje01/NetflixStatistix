@@ -36,6 +36,21 @@ public class DatabaseConnection {
         }
     }
 
+    public static void giveStatement(String givenStatement)   {    // Creates new statement and returns nothing
+        Statement statement;                    // Statement-data
+
+        try {
+            statement = connection.createStatement();
+            statement.executeQuery(givenStatement);         // Parses the statement-string to SQL-code
+            System.out.println("Statement " + givenStatement + " uitgevoerd.");
+        }
+
+        catch (Exception e)   {
+            e.printStackTrace();
+        }
+    }
+
+
     public static void disconnect()    {         // cuts off the connection
         if (connection != null) try { connection.close(); } catch(Exception e)          {/*VUL ACTIE IN*/}
     }
