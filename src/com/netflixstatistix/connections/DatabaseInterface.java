@@ -374,7 +374,11 @@ public class DatabaseInterface {
         }
     }
 
+<<<<<<< HEAD
     // (ArrayList<String>) GET LIST OF PROFILE NAMES FROM ACCOUNT
+=======
+    // (String[]) GET LIST OF PROFILE NAMES FROM ACCOUNT
+>>>>>>> a200a432ce45261a86e1dbafb71bf794f1a9810e
     public ArrayList<String> getListOfProfilesFromAccount(int AbonneeID) {
         try {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profielnaam FROM Profiel WHERE AbonneeID = '"  + AbonneeID +  "';");
@@ -698,6 +702,8 @@ public class DatabaseInterface {
             return allSeriesTwo;
         }
     }
+
+
 
 }
 
