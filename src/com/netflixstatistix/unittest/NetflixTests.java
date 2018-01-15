@@ -1,8 +1,7 @@
 package com.netflixstatistix.unittest;
 import com.netflixstatistix.connections.DatabaseConnection;
 import com.netflixstatistix.session.Session;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 import java.sql.ResultSet;
 
 public class NetflixTests {
