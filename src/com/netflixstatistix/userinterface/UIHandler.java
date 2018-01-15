@@ -15,13 +15,11 @@ package com.netflixstatistix.userinterface;
         import com.netflixstatistix.session.CurrentSession;
         import com.netflixstatistix.userinterface.about.AboutInterface;
 
-<<<<<<< HEAD
+
         import static java.awt.GridBagConstraints.FIRST_LINE_START;
 
-public class UIHandler {
-=======
 public class UIHandler extends CurrentSession {
->>>>>>> 8140f41dd50597d7e671a9abce4d0001fb6ee6b7
+
 
 
     // GLOBAL DECLARATIONS
@@ -289,5 +287,5 @@ public class UIHandler extends CurrentSession {
 
         return centerContainer;
     }
-
 }
+
