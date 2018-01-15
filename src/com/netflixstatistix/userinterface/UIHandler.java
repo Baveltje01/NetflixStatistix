@@ -7,8 +7,10 @@ package com.netflixstatistix.userinterface;
         import java.awt.event.ActionEvent;
         import java.awt.event.ActionListener;
         import java.beans.PropertyVetoException;
+        import java.lang.reflect.Array;
         import java.net.URL;
         import java.util.ArrayList;
+        import java.util.Arrays;
 
         import com.netflixstatistix.connections.DatabaseConnection;
         import com.netflixstatistix.connections.DatabaseInterface;
@@ -186,7 +188,7 @@ public class UIHandler extends CurrentSession {
         JButton functie2 = new JButton("Functie2");
         JButton functie3 = new JButton("Functie3");
         JButton functie4 = new JButton("Functie4");
-        JButton functie5 = new JButton("Functie5");
+        JButton functie5 = new JButton("Accounts met enkel Profiel");
         JButton functie6 = new JButton("Functie6");
         gbc1.gridx = 0;
         gbc1.gridy = 0;
@@ -380,23 +382,28 @@ public class UIHandler extends CurrentSession {
             public void actionPerformed(ActionEvent e){
 
                 internalFrameContainer.removeAll();
-                JInternalFrame frame = new JInternalFrame("Functie 5", false, false, false, false);
+                JInternalFrame frame = new JInternalFrame("Accounts met een enkel Profiel", false, false, false, false);
                 frame.setLayout(new GridBagLayout());
 
 
                 // UI components and logic for frame
-                JTextField textField1 = new JTextField("TEST 5 YOU");
+                JLabel label1 = new JLabel("Hieronder volgen de accounts met slechts 1 enkel profiel");
                 gbc.anchor = GridBagConstraints.NORTH;
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.weighty = 0.0;
-                frame.add(textField1, gbc);
+                frame.add(label1, gbc);
+                int i = 0;
+                ArrayList<String> array = session.getAccountsWithOneProfile();
 
-                JTextField textField2 = new JTextField("KNOW DA WAE");
-                gbc.gridx = 0;
-                gbc.gridy = 1;
-                gbc.weighty = 1.0;
-                frame.add(textField2, gbc);
+                for (String item : array) {
+                    JTextField textField = new JTextField(item);
+                    gbc.anchor = GridBagConstraints.NORTH;
+                    gbc.gridy = i + 1;
+
+                    textField.setEnabled(false);
+                    frame.add(textField, gbc);
+                }
 
 
                 // ADDING frames to internalcontainer

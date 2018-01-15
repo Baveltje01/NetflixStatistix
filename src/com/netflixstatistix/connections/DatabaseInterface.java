@@ -98,18 +98,17 @@ public class DatabaseInterface {
     }
 
 
-    // (String[]) GET ALL ACCOUNTS WITH ONLY A SINGLE PROFILE
-    public String[] getAccountsWithSingleProfile () {
+    // (ArrayList<String>) GET ALL ACCOUNTS WITH ONLY A SINGLE PROFILE
+    public ArrayList<String> getAccountsWithSingleProfile () {
         try {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.Naam FROM Profiel JOIN Abonnee ON Profiel.AbonneeID = Abonnee.AbonneeID GROUP BY Abonnee.Naam HAVING COUNT(*) = 1;");
-            int i = 0;
-            String[] accountsWithSingleProfile = new String[rs.getMetaData().getColumnCount()];
+            ArrayList<String> accountsWithSingleProfile = new ArrayList<>();
             if (!rs.next()) {
-                return null;
+                accountsWithSingleProfile.add("Geen resultaten gevonden");
+                return accountsWithSingleProfile;
             }
             while (rs.next()) {
-                accountsWithSingleProfile[i] = rs.getString("Naam");
-                i++;
+                accountsWithSingleProfile.add(rs.getString("Naam"));
             }
             return accountsWithSingleProfile;
         } catch(Exception e) {

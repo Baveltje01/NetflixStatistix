@@ -25,10 +25,10 @@ public class Session {
     private String profielNaam;
     private String profielGeboortedatum;
 
-    // Video Statistics
+    // Statistics
     private ArrayList<String> latestVideoTitleArray;
-
     private String currentVideoTitle;
+    private ArrayList<String> accountsWithOneProfile;
 
 
 
@@ -49,6 +49,7 @@ public class Session {
 
         this.latestVideoTitleArray = di.getTopTenLastViewedMoviesAndSeries(this.profielNaam, this.abonneeID);
         this.currentVideoTitle = this.latestVideoTitleArray.get(0);
+        this.accountsWithOneProfile = di.getAccountsWithSingleProfile();
 
 
 
@@ -157,5 +158,13 @@ public class Session {
 
     public void setCurrentVideoTitle(String currentVideoTitle) {
         this.currentVideoTitle = currentVideoTitle;
+    }
+
+    public ArrayList<String> getAccountsWithOneProfile() {
+        return accountsWithOneProfile;
+    }
+
+    public void setAccountsWithOneProfile(ArrayList<String> accountsWithOneProfile) {
+        this.accountsWithOneProfile = accountsWithOneProfile;
     }
 }
