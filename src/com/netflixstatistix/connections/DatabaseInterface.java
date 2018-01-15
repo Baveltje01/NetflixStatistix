@@ -534,6 +534,21 @@ public class DatabaseInterface {
         }
     }
 
+    // (STRING) GET LONGEST MOVIE UNDER SIXTEEN YRS
+    public String getLongestMovieUnderSixteen() {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT TOP 1 Titel FROM Film WHERE (GeschikteLeeftijd < 16) ORDER BY Tijdsduur DESC");
+            if (rs.next()) {
+                return rs.getString("Titel");
+            } else {
+                return "Geen Film gevonden";
+            }
+        } catch (Exception e) {
+            System.out.println("Error fetching longest movie under sixteen, " + e.getMessage());
+            return "Error fetching longest movie under sixteen";
+        }
+    }
+
 
 
 }

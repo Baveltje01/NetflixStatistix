@@ -298,21 +298,24 @@ public class UIHandler extends CurrentSession {
             }
         });
 
-        functie3.addActionListener(new ActionListener() {
+        functie3.addActionListener(new ActionListener() { // FILMS VIEWED BY SELECTED ACCOUNT
             public void actionPerformed(ActionEvent e){
 
                 internalFrameContainer.removeAll();
                 JInternalFrame frame = new JInternalFrame("Functie 3", false, false, false, false);
                 frame.setLayout(new GridBagLayout());
+                //getListOfAccountNames()    String[]
 
 
                 // UI components and logic for frame
-                JTextField textField1 = new JTextField("DDDDDDD YOU");
-                gbc.anchor = GridBagConstraints.NORTH;
-                gbc.gridx = 0;
-                gbc.gridy = 0;
-                gbc.weighty = 0.0;
-                frame.add(textField1, gbc);
+//                JComboBox<String> accountField = new JComboBox<String>("Abonnees");
+//                gbc.anchor = GridBagConstraints.NORTH;
+//                gbc.gridx = 0;
+//                gbc.gridy = 0;
+//                gbc.weighty = 0.0;
+//                frame.add(accountField, gbc);
+
+
 
                 JTextField textField2 = new JTextField("KNOW DA WAE");
                 gbc.gridx = 0;
@@ -338,7 +341,7 @@ public class UIHandler extends CurrentSession {
             }
         });
 
-        functie4.addActionListener(new ActionListener() {
+        functie4.addActionListener(new ActionListener() { // LONGEST MOVIE RATED UNDER 16 YRS
             public void actionPerformed(ActionEvent e){
 
                 internalFrameContainer.removeAll();
@@ -347,14 +350,19 @@ public class UIHandler extends CurrentSession {
 
 
                 // UI components and logic for frame
-                JTextField textField1 = new JTextField("ASDASDASD YOU");
+                JTextField textField1 = new JTextField("Langste film voor kijkers jonger dan 16 jaar");
                 gbc.anchor = GridBagConstraints.NORTH;
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.weighty = 0.0;
                 frame.add(textField1, gbc);
 
-                JTextField textField2 = new JTextField("KNOW DA WAE");
+                DatabaseConnection.connect();
+                String output = new String();
+                output = di.getLongestMovieUnderSixteen();
+                DatabaseConnection.disconnect();
+
+                JTextField textField2 = new JTextField(output);
                 gbc.gridx = 0;
                 gbc.gridy = 1;
                 gbc.weighty = 1.0;
