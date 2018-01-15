@@ -6,6 +6,7 @@ package com.netflixstatistix.userinterface;
         import java.awt.*;
         import java.awt.event.ActionEvent;
         import java.awt.event.ActionListener;
+        import java.beans.PropertyVetoException;
         import java.net.URL;
         import java.util.ArrayList;
 
@@ -169,9 +170,12 @@ public class UIHandler extends CurrentSession {
 
         DatabaseConnection.connect();
 
-        JPanel centerContainer = new JPanel(new GridBagLayout());
+        JPanel centerContainer = new JPanel(new BorderLayout());
         centerContainer.setBorder(grey);
         centerContainer.setBorder(new EmptyBorder(10,10,10,10));
+
+        JPanel buttonContainer = new JPanel(new GridBagLayout());
+        JDesktopPane internalFrameContainer = new JDesktopPane();
 
         GridBagConstraints gbc1 = new GridBagConstraints();
         gbc1.fill = GridBagConstraints.HORIZONTAL;
@@ -184,101 +188,118 @@ public class UIHandler extends CurrentSession {
         JButton functie4 = new JButton("Functie4");
         JButton functie5 = new JButton("Functie5");
         JButton functie6 = new JButton("Functie6");
-        JInternalFrame frame1 = new JInternalFrame("Testframe 1");
-        JTextField textField1 = new JTextField("Testtextfield 1");
+        JInternalFrame frame3 = new JInternalFrame("Functie 3", false, false, false, false);
+        JInternalFrame frame4 = new JInternalFrame("Functie 4", false, false, false, false);
+        JInternalFrame frame5 = new JInternalFrame("Functie 5", false, false, false, false);
+        JInternalFrame frame6 = new JInternalFrame("Functie 6", false, false, false, false);
 
-        textField1.setSize(200,200);
-        textField1.setVisible(true);
-
-        frame1.setSize(200,100);
-        frame1.setVisible(true);
-
-        functie1.addActionListener(new ActionListener() {                                                              // NEW WINDOW OPENS ON PRESSING 'aboutItemMenu'
-            public void actionPerformed(ActionEvent e){
-                centerContainer.removeAll();
-                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
-                gbc1.gridx = 0;
-                gbc1.gridy = 0;
-                centerContainer.add(functie1,gbc1);
-
-                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
-                gbc1.gridx = 1;
-                gbc1.gridy = 0;
-                centerContainer.add(functie2,gbc1);
-
-                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
-                gbc1.gridx = 2;
-                gbc1.gridy = 0;
-                centerContainer.add(functie3,gbc1);
-
-                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
-                gbc1.gridx = 3;
-                gbc1.gridy = 0;
-                centerContainer.add(functie4,gbc1);
-
-                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
-                gbc1.gridx = 4;
-                gbc1.gridy = 0;
-                centerContainer.add(functie5,gbc1);
-
-                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
-                gbc1.gridx = 5;
-                gbc1.gridy = 0;
-                centerContainer.add(functie6,gbc1);
-
-                gbc1.anchor = GridBagConstraints.FIRST_LINE_START;
-                gbc1.gridx = 0;
-                gbc1.gridy = 1;
-                centerContainer.add(frame1,gbc1);
-
-                centerContainer.revalidate();
-                centerContainer.repaint();
-            }
-        });
-
-
+        gbc1.gridx = 0;
+        gbc1.gridy = 0;
+        buttonContainer.add(functie1,gbc1);
 
         gbc1.gridx = 1;
         gbc1.gridy = 0;
-        centerContainer.add(functie1);
+        buttonContainer.add(functie2,gbc1);
+
+        gbc1.gridx = 2;
+        gbc1.gridy = 0;
+        buttonContainer.add(functie3,gbc1);
+
+        gbc1.gridx = 3;
+        gbc1.gridy = 0;
+        buttonContainer.add(functie4,gbc1);
+
+        gbc1.gridx = 4;
+        gbc1.gridy = 0;
+        buttonContainer.add(functie5,gbc1);
+
+        gbc1.gridx = 5;
+        gbc1.gridy = 0;
+        buttonContainer.add(functie6,gbc1);
 
 
-        gbc1.gridx = 0;
-        gbc1.gridy = 2;
+        centerContainer.add(buttonContainer, BorderLayout.NORTH);
+        centerContainer.add(internalFrameContainer, BorderLayout.CENTER);
+        GridBagConstraints gbc = new GridBagConstraints();
 
-        centerContainer.add(detailTitle, gbc1);
+        functie1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
 
-        // TABLE HEADER
-        String[] columns = new String[] {
-                "Statistiek", "Resultaat"
-        };
+                internalFrameContainer.removeAll();
+                JInternalFrame frame = new JInternalFrame("Functie 1", false, false, false, false);
+                frame.setLayout(new GridBagLayout());
 
-        // TABLE DATA
-        Object[][] data = new Object[][] {
-                {"Versiebeheer", appDetails.getAuthors()},
-                {2, "B"},
-                {2, "B"},
-                {2, "C"},
-                {2, "D"},
-                {2, "E"},
-                {2, "F"},
-                {2, "G"},
-                {2, "H"},
-                {2, "I"},
-                {2, "J"},
-                {2, "K"},
-                {2, "L"},
-                {2, "M"},
-                {3, "N"}
-        };
-        //create table with data
-        JTable table = new JTable(data, columns);
-        table.getTableHeader().setReorderingAllowed(false);
-        table.setEnabled(false);
+                // UI components and logic for frame
+                JTextField textField1 = new JTextField("DO YOU");
+                gbc.anchor = GridBagConstraints.NORTH;
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.weighty = 0.0;
+                frame.add(textField1, gbc);
 
-        gbc1.gridx = 0;
-        gbc1.gridy = 3;
-        centerContainer.add(new JScrollPane(table), gbc1);
+                JTextField textField2 = new JTextField("KNOW DA WAE");
+                gbc.gridx = 0;
+                gbc.gridy = 1;
+                gbc.weighty = 1.0;
+                frame.add(textField2, gbc);
+
+
+                // ADDING frames to internalcontainer
+                internalFrameContainer.add(frame, BorderLayout.CENTER);
+
+
+                // MAXIMIZE FRAME
+                try {
+                    frame.setMaximum(true);
+                } catch (PropertyVetoException exception) {
+                    System.out.println("Error full-screening frame.");
+                }
+
+                centerContainer.revalidate();
+                centerContainer.repaint();
+                frame.setVisible(true);
+            }
+        });
+
+        functie2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+
+                internalFrameContainer.removeAll();
+                JInternalFrame frame = new JInternalFrame("Functie 2", false, false, false, false);
+                frame.setLayout(new GridBagLayout());
+
+
+                // UI components and logic for frame
+                JTextField textField1 = new JTextField("DDDDDDD YOU");
+                gbc.anchor = GridBagConstraints.NORTH;
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.weighty = 0.0;
+                frame.add(textField1, gbc);
+
+                JTextField textField2 = new JTextField("KNOW DA WAE");
+                gbc.gridx = 0;
+                gbc.gridy = 1;
+                gbc.weighty = 1.0;
+                frame.add(textField2, gbc);
+
+
+                // ADDING frames to internalcontainer
+                internalFrameContainer.add(frame, BorderLayout.CENTER);
+
+
+                // MAXIMIZE FRAME
+                try {
+                    frame.setMaximum(true);
+                } catch (PropertyVetoException exception) {
+                    System.out.println("Error full-screening frame.");
+                }
+
+                centerContainer.revalidate();
+                centerContainer.repaint();
+                frame.setVisible(true);
+            }
+        });
 
         DatabaseConnection.disconnect();
 
