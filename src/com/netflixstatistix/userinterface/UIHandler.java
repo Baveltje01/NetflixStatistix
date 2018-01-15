@@ -357,10 +357,7 @@ public class UIHandler extends CurrentSession {
                 gbc.weighty = 0.0;
                 frame.add(textField1, gbc);
 
-                DatabaseConnection.connect();
-                String output = new String();
-                output = di.getLongestMovieUnderSixteen();
-                DatabaseConnection.disconnect();
+                String output = session.getLongestMovieUnder16();
 
                 JTextField textField2 = new JTextField(output);
                 gbc.gridx = 0;

@@ -29,6 +29,7 @@ public class Session {
     private ArrayList<String> latestVideoTitleArray;
     private String currentVideoTitle;
     private ArrayList<String> accountsWithOneProfile;
+    private String longestMovieUnder16;
 
 
 
@@ -50,7 +51,7 @@ public class Session {
         this.latestVideoTitleArray = di.getTopTenLastViewedMoviesAndSeries(this.profielNaam, this.abonneeID);
         this.currentVideoTitle = this.latestVideoTitleArray.get(0);
         this.accountsWithOneProfile = di.getAccountsWithSingleProfile();
-
+        this.longestMovieUnder16 = di.getLongestMovieUnderSixteen();
 
 
 
@@ -166,5 +167,13 @@ public class Session {
 
     public void setAccountsWithOneProfile(ArrayList<String> accountsWithOneProfile) {
         this.accountsWithOneProfile = accountsWithOneProfile;
+    }
+
+    public String getLongestMovieUnder16() {
+        return longestMovieUnder16;
+    }
+
+    public void setLongestMovieUnder16(String longestMovieUnder16) {
+        this.longestMovieUnder16 = longestMovieUnder16;
     }
 }
