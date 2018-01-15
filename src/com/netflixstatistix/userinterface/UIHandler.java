@@ -13,6 +13,7 @@ package com.netflixstatistix.userinterface;
         import java.util.Arrays;
         import java.util.Vector;
 
+        import com.netflixstatistix.Abonnee;
         import com.netflixstatistix.connections.DatabaseConnection;
         import com.netflixstatistix.connections.DatabaseInterface;
         import com.netflixstatistix.jgravatar.*;
@@ -110,9 +111,11 @@ public class UIHandler extends CurrentSession {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DatabaseConnection.connect();
+
                 String output = subscriberDropdown.getSelectedItem().toString();
                 int result = di.getAccountIDByAccountName(output);
 
+                Abonnee.abonneeID = result;
                 session = new Session(result);
                 UI ui = new UI();
 

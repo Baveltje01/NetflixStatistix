@@ -24,7 +24,21 @@ public class DatabaseInterface {
             System.out.println("An Error Occurred.. " + e.getMessage());
             return 0;
         }
+    }
 
+    // (INT) AccountID from AccountNaam
+    public int getAccountIDFromAccountName(String AccountNaam) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.AbonneeID FROM Abonnee WHERE Abonnee.Naam = "+ AccountNaam + "");
+            if (rs.next()) {
+                return rs.getInt("AbonneeID");
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            return 0;
+        }
     }
 
     // (INT) GET AMOUNT OF EPISODES PER SERIE AMOUNT
