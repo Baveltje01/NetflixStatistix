@@ -11,6 +11,7 @@ package com.netflixstatistix.userinterface;
         import java.net.URL;
         import java.util.ArrayList;
         import java.util.Arrays;
+        import java.util.Vector;
 
         import com.netflixstatistix.connections.DatabaseConnection;
         import com.netflixstatistix.connections.DatabaseInterface;
@@ -304,24 +305,35 @@ public class UIHandler extends CurrentSession {
                 internalFrameContainer.removeAll();
                 JInternalFrame frame = new JInternalFrame("Functie 3", false, false, false, false);
                 frame.setLayout(new GridBagLayout());
-                //getListOfAccountNames()    String[]
-
 
                 // UI components and logic for frame
-//                JComboBox<String> accountField = new JComboBox<String>("Abonnees");
-//                gbc.anchor = GridBagConstraints.NORTH;
-//                gbc.gridx = 0;
-//                gbc.gridy = 0;
-//                gbc.weighty = 0.0;
-//                frame.add(accountField, gbc);
+                JLabel header = new JLabel("Films bekeken door geselecteerde abonnee");
+                JButton execute = new JButton("Bekijk films");
+                JList<String> filmLijst = new JList<String>();
 
-
-
-                JTextField textField2 = new JTextField("KNOW DA WAE");
+                gbc.anchor = GridBagConstraints.NORTH;
                 gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.weighty = 0.0;
+                frame.add(header, gbc);
+
+                DatabaseConnection.connect();
+                ArrayList<String> accountArray = di.getListOfAccountNamesArrayList(); // RETRIEVES ACCOUNTS FROM DB NTO ARRAYLIST
+                DatabaseConnection.disconnect();
+
+                JComboBox<String> accountField = new JComboBox<String>(new Vector<>(accountArray));
+                gbc.weightx = 2;
+                gbc.weighty = 2;
                 gbc.gridy = 1;
-                gbc.weighty = 1.0;
-                frame.add(textField2, gbc);
+                frame.add(accountField, gbc);
+                gbc.gridy = 2;
+                frame.add(execute, gbc);
+
+                JList movieField = new JList();
+                movieField.setSize(30,30);
+                movieField.setVisible(true);
+                gbc.gridy = 3;
+                frame.add(movieField,gbc);
 
 
                 // ADDING frames to internalcontainer
@@ -350,7 +362,7 @@ public class UIHandler extends CurrentSession {
 
 
                 // UI components and logic for frame
-                JTextField textField1 = new JTextField("Langste film voor kijkers jonger dan 16 jaar");
+                JLabel textField1 = new JLabel("Langste film voor kijkers jonger dan 16 jaar");
                 gbc.anchor = GridBagConstraints.NORTH;
                 gbc.gridx = 0;
                 gbc.gridy = 0;

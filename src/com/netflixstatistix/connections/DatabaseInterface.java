@@ -314,7 +314,7 @@ public class DatabaseInterface {
         }
     }
 
-    // (String[]) GET LIST OF ACCOUNT NAMES
+    // (String[]) GET LIST OF ACCOUNT NAMES ARRAY
     public String[] getListOfAccountNames() {
         try {
             rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.Naam FROM Abonnee;");
@@ -331,6 +331,24 @@ public class DatabaseInterface {
             String[] array2 = new String[0];
             Arrays.fill(array2, "Error fetching list of account names");
             return array2;
+        }
+    }
+
+    // (String[]) GET LIST OF ACCOUNT NAMES ARRAY
+    public ArrayList<String> getListOfAccountNamesArrayList() {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Abonnee.Naam FROM Abonnee;");
+            ArrayList<String> listOfAccountNames = new ArrayList<String>();
+            while (rs.next()) {
+                listOfAccountNames.add(rs.getString("Naam"));
+            }
+            return listOfAccountNames;
+
+        } catch (Exception e) {
+            System.out.println("Error fetching list of account names, " + e.getMessage());
+            ArrayList<String> listOfAccountNamesTwo = new ArrayList<String>();
+            listOfAccountNamesTwo.add("No accounts found.");
+            return listOfAccountNamesTwo;
         }
     }
 
