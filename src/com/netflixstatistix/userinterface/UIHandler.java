@@ -309,7 +309,6 @@ public class UIHandler extends CurrentSession {
                 // UI components and logic for frame
                 JLabel header = new JLabel("Films bekeken door geselecteerde abonnee");
                 JButton execute = new JButton("Bekijk films");
-                JList<String> filmLijst = new JList<String>();
 
                 gbc.anchor = GridBagConstraints.NORTH;
                 gbc.gridx = 0;
@@ -330,9 +329,6 @@ public class UIHandler extends CurrentSession {
                 gbc.gridy = 2;
                 frame.add(execute, gbc);
 
-
-
-
                 execute.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
                         try{
@@ -348,9 +344,11 @@ public class UIHandler extends CurrentSession {
 
                         gbc.gridy = 3;
 
-
+                        header.setText("Films bekeken door " + String.valueOf(accountSelection));
                         frame.add(movieField,gbc);
                         execute.setVisible(false);
+                        accountField.setVisible(false);
+
                         movieField.setVisible(true);
                         centerContainer.revalidate();
                         centerContainer.repaint();

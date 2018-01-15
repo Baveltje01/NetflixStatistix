@@ -105,13 +105,16 @@ public class DatabaseInterface {
             while (rs.next()) {
                 moviesViewedByAccount.add(rs.getString("Titel"));
             }
-            String[] array = new String[moviesViewedByAccount.size()];
+
+            if(moviesViewedByAccount.isEmpty()){
+                moviesViewedByAccount.add("Dit account heeft nog geen films bekeken.");
+            }
             return moviesViewedByAccount;
 
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
             ArrayList<String> moviesViewedByAccountTwo = new ArrayList<String>();
-            moviesViewedByAccountTwo.add("No movies watched.");
+            moviesViewedByAccountTwo.add("Error writing list of movies viewed by account");
             return moviesViewedByAccountTwo;
         }
     }
