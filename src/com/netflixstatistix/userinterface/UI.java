@@ -56,7 +56,7 @@ public class UI extends CurrentSession implements Runnable {
 
         createLeftProfileMenu = uih.createLeftProfileMenu(session.getAbonneeID(), session.getProfielNaam(), session.getAbonneeEmail());
         westContainer.add(createLeftProfileMenu, BorderLayout.NORTH);
-        westContainer.add(uih.createShowSelector(session.getProfielNaam(), session.getLatestVideoTitleArray()), BorderLayout.SOUTH);
+        westContainer.add(uih.createUserMenuButtons(), BorderLayout.SOUTH);
         pane.add(westContainer, BorderLayout.WEST);
 
         // Credits Footer

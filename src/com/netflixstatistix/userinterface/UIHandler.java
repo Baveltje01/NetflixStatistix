@@ -18,6 +18,7 @@ package com.netflixstatistix.userinterface;
         import com.netflixstatistix.jgravatar.*;
         import com.netflixstatistix.session.CurrentSession;
         import com.netflixstatistix.userinterface.about.AboutInterface;
+        import com.netflixstatistix.userinterface.account.AccountManager;
 
 
         import static java.awt.GridBagConstraints.FIRST_LINE_START;
@@ -143,7 +144,7 @@ public class UIHandler extends CurrentSession {
         return creditsContainer;
     }
 
-    public JPanel createShowSelector(String profielNaam, ArrayList<String> latestVideoTitleArray) {
+    public JPanel createUserMenuButtons() {
 
         DatabaseConnection.connect();
 
@@ -153,13 +154,16 @@ public class UIHandler extends CurrentSession {
         gbc2.fill = GridBagConstraints.HORIZONTAL;
         gbc2.gridwidth = GridBagConstraints.REMAINDER;
 
-        for (String title : latestVideoTitleArray) {
-            JButton show = new JButton(title);
-            FrameSwitcher frameSwitcher = new FrameSwitcher(show);
-            show.setMargin(new Insets(5, 0, 5, 0));
-            show.addActionListener(frameSwitcher);
-            showSubContainer.add(show, gbc2);
-        }
+        JButton userMenuButton = new JButton("Wijzig Gebruikersgegevens");
+        userMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AccountManager accountManager = new AccountManager();
+                SwingUtilities.invokeLater(accountManager);
+            }
+        });
+
+        showSubContainer.add(userMenuButton, gbc2);
 
         showSubContainer.validate();
         showSubContainer.repaint();
@@ -226,20 +230,64 @@ public class UIHandler extends CurrentSession {
                 internalFrameContainer.removeAll();
                 JInternalFrame frame = new JInternalFrame("Functie 1", false, false, false, false);
                 frame.setLayout(new GridBagLayout());
+                JLabel header = new JLabel("Gemiddeld bekeken percentage van afleveringen van serie");
+
+
+                // Functional part
+
+                DatabaseConnection.connect();
+                ArrayList<String> serieArray = di.getAllSeries(); // RETRIEVES ACCOUNTS FROM DB INTO ARRAYLIST
+                DatabaseConnection.disconnect();
+
+                JComboBox<String> serieField = new JComboBox<String>(new Vector<>(serieArray));
+                gbc.weightx = 2;
+                gbc.weighty = 2;
+                gbc.gridy = 1;
+                frame.add(serieField, gbc);
+
+                JButton execute = new JButton("Zoek");
+                gbc.weightx = 2;
+                gbc.weighty = 0.5;
+                gbc.gridy = 2;
+                frame.add(execute, gbc);
+
+                execute.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        try{
+                            Object serieSelection = serieField.getSelectedItem();
+
+
+                            DatabaseConnection.connect();
+                            ArrayList<String> serieArray = di.getAvgWatchTimeOfSerie(String.valueOf(serieSelection));
+                            DatabaseConnection.disconnect();
+
+                            JList movieField = new JList(new Vector<>(serieArray));
+                            movieField.setSize(30,60);
+
+                            gbc.gridy = 3;
+
+                            header.setText("Gemiddeld bekeken percentage per aflevering van " + String.valueOf(serieSelection));
+                            frame.add(movieField,gbc);
+                            execute.setVisible(false);
+                            serieField.setVisible(false);
+
+                            movieField.setVisible(true);
+                            centerContainer.revalidate();
+                            centerContainer.repaint();
+                        }
+
+                        catch(Exception a){
+                            System.out.println("Error outputting list of movies viewed by account.");
+                        }
+                    }
+                });
 
                 // UI components and logic for frame
-                JTextField textField1 = new JTextField("DO YOU");
                 gbc.anchor = GridBagConstraints.NORTH;
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.weighty = 0.0;
-                frame.add(textField1, gbc);
-
-                JTextField textField2 = new JTextField("KNOW DA WAE");
-                gbc.gridx = 0;
-                gbc.gridy = 1;
-                gbc.weighty = 1.0;
-                frame.add(textField2, gbc);
+                frame.add(header, gbc);
 
 
                 // ADDING frames to internalcontainer
@@ -265,21 +313,73 @@ public class UIHandler extends CurrentSession {
                 internalFrameContainer.removeAll();
                 JInternalFrame frame = new JInternalFrame("Functie 2", false, false, false, false);
                 frame.setLayout(new GridBagLayout());
+                JLabel header = new JLabel("Gemiddeld bekeken percentage van afleveringen van serie per account");
 
+
+                // Functional part
+
+                DatabaseConnection.connect();
+                ArrayList<String> accountArray = di.getListOfAccountNamesArrayList(); // RETRIEVES ACCOUNTS FROM DB INTO ARRAYLIST
+                ArrayList<String> serieArray = di.getAllSeries(); // RETRIEVES SERIES FROM DB INTO ARRAYLIST
+                DatabaseConnection.disconnect();
+
+                JComboBox<String> accountField = new JComboBox<String>(new Vector<>(accountArray));
+                gbc.weightx = 2;
+                gbc.weighty = 2;
+                gbc.gridy = 1;
+                frame.add(accountField, gbc);
+
+                JComboBox<String> serieField = new JComboBox<String>(new Vector<>(serieArray));
+                gbc.weightx = 2;
+                gbc.weighty = 2;
+                gbc.gridy = 2;
+                frame.add(serieField, gbc);
+
+                JButton execute = new JButton("Zoek");
+                gbc.weightx = 2;
+                gbc.weighty = 0.5;
+                gbc.gridy = 3;
+                frame.add(execute, gbc);
+
+                execute.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        try{
+                            Object accountSelection = accountField.getSelectedItem();
+                            Object serieSelection = serieField.getSelectedItem();
+
+
+                            DatabaseConnection.connect();
+                            ArrayList<String> serieArray = di.getAvgWatchTimeOfSeriePerAccount(String.valueOf(accountSelection),String.valueOf(serieSelection));
+                            DatabaseConnection.disconnect();
+
+                            JList movieField = new JList(new Vector<>(serieArray));
+                            movieField.setSize(30,60);
+
+                            gbc.gridy = 3;
+
+                            header.setText("Gemiddeld bekeken percentage per aflevering van " + String.valueOf(serieSelection));
+                            frame.add(movieField,gbc);
+                            execute.setVisible(false);
+                            accountField.setVisible(false);
+                            serieField.setVisible(false);
+
+                            movieField.setVisible(true);
+                            centerContainer.revalidate();
+                            centerContainer.repaint();
+                        }
+
+                        catch(Exception a){
+                            System.out.println("Error outputting list of movies viewed by account.");
+                        }
+                    }
+                });
 
                 // UI components and logic for frame
-                JTextField textField1 = new JTextField("DDDDASDDDD YOU");
                 gbc.anchor = GridBagConstraints.NORTH;
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.weighty = 0.0;
-                frame.add(textField1, gbc);
-
-                JTextField textField2 = new JTextField("KNOW DA WAE");
-                gbc.gridx = 0;
-                gbc.gridy = 1;
-                gbc.weighty = 1.0;
-                frame.add(textField2, gbc);
+                frame.add(header, gbc);
 
 
                 // ADDING frames to internalcontainer

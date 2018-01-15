@@ -620,7 +620,85 @@ public class DatabaseInterface {
         }
     }
 
+    // ArrayList<String> GET AVG WATCH TIME OF SERIE PER ACCOUNT
+    public ArrayList<String> getAvgWatchTimeOfSeriePerAccount(String AbonneeNaam, String SerieNaam) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT CONCAT(Aflevering.SeizoenEnAflevering,' - ', Aflevering.Titel,' - ',AVG(BekekenProgramma.Percentage),'% bekeken') AS Aflevering \n" +
+                    "FROM BekekenProgramma\n" +
+                    "JOIN Programma ON BekekenProgramma.ProgrammaID = Programma.ProgrammaID\n" +
+                    "JOIN Aflevering ON Programma.ProgrammaID = Aflevering.ProgrammaID\n" +
+                    "JOIN Serie ON Aflevering.Serie = Serie.SerieNaam\n" +
+                    "JOIN Profiel ON BekekenProgramma.AbonneeID = Profiel.AbonneeID\n" +
+                    "JOIN Abonnee ON Profiel.AbonneeID = Abonnee.AbonneeID\n" +
+                    "WHERE (Serie.SerieNaam = '" + SerieNaam + "') AND (Abonnee.Naam = '" + AbonneeNaam + "')\n" +
+                    "GROUP BY Aflevering.SeizoenEnAflevering, Aflevering.Titel, Aflevering.AfleveringID\n" +
+                    "ORDER BY Aflevering.AfleveringID;\n");
+            ArrayList<String> listOfAvgWatchedEpisodes = new ArrayList<String>();
+            while (rs.next()) {
+                listOfAvgWatchedEpisodes.add(rs.getString("Aflevering"));
+            }
 
+            if(listOfAvgWatchedEpisodes.isEmpty()){
+                listOfAvgWatchedEpisodes.add("Geen afleveringen bekeken.");
+            }
+
+            return listOfAvgWatchedEpisodes;
+
+        } catch (Exception e) {
+            System.out.println("Error fetching average watchtime of episodes, " + e.getMessage());
+            ArrayList<String> listOfAccountNamesTwo = new ArrayList<String>();
+            listOfAccountNamesTwo.add("Error fetching average watchtime of episodes");
+            return listOfAccountNamesTwo;
+        }
+    }
+
+    // ArrayList<String> GET AVG WATCH TIME OF SERIE
+    public ArrayList<String> getAvgWatchTimeOfSerie(String SerieNaam) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT CONCAT(Aflevering.SeizoenEnAflevering,' - ', Aflevering.Titel,' - ',AVG(BekekenProgramma.Percentage),'% bekeken') AS Aflevering, AVG(BekekenProgramma.Percentage) AS AvgBekekenPercentage\n" +
+                    "FROM BekekenProgramma\n" +
+                    "JOIN Programma ON BekekenProgramma.ProgrammaID = Programma.ProgrammaID\n" +
+                    "JOIN Aflevering ON Programma.ProgrammaID = Aflevering.ProgrammaID\n" +
+                    "JOIN Serie ON Aflevering.Serie = Serie.SerieNaam\n" +
+                    "WHERE Serie.SerieNaam = '" + SerieNaam + "'\n" +
+                    "GROUP BY Aflevering.SeizoenEnAflevering, Aflevering.Titel, Aflevering.AfleveringID\n" +
+                    "ORDER BY Aflevering.AfleveringID;\n");
+            ArrayList<String> listOfAvgWatchedEpisodes = new ArrayList<String>();
+            while (rs.next()) {
+                listOfAvgWatchedEpisodes.add(rs.getString("Aflevering"));
+            }
+
+            if(listOfAvgWatchedEpisodes.isEmpty()){
+                listOfAvgWatchedEpisodes.add("Geen afleveringen bekeken.");
+            }
+
+            return listOfAvgWatchedEpisodes;
+
+        } catch (Exception e) {
+            System.out.println("Error fetching average watchtime of episodes, " + e.getMessage());
+            ArrayList<String> listOfAccountNamesTwo = new ArrayList<String>();
+            listOfAccountNamesTwo.add("Error fetching average watchtime of episodes");
+            return listOfAccountNamesTwo;
+        }
+    }
+
+    // ArrayList<String> GET ALL SERIES
+    public ArrayList<String> getAllSeries() {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT SerieNaam FROM Serie");
+            ArrayList<String> allSeries = new ArrayList<String>();
+            while (rs.next()) {
+                allSeries.add(rs.getString("SerieNaam"));
+            }
+            return allSeries;
+
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            ArrayList<String> allSeriesTwo = new ArrayList<String>();
+            allSeriesTwo.add("No series found.");
+            return allSeriesTwo;
+        }
+    }
 
 }
 
