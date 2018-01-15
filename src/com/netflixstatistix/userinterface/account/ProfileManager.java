@@ -25,7 +25,7 @@ public class ProfileManager extends CurrentSession implements Runnable{
     @Override
     public void run() {
         frame = new JFrame("Wijzig Profielen");
-        frame.setPreferredSize(new Dimension(450, 300));
+        frame.setPreferredSize(new Dimension(600, 300));
         frame.setResizable(false);
 
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -87,6 +87,8 @@ public class ProfileManager extends CurrentSession implements Runnable{
                         dateIsRight = new SimpleDateFormat("yyyy-MM-dd").parse(profileBirthdayField.getText()).before(new Date());
                     } catch (ParseException parseException) {
                         parseException.printStackTrace();
+                        System.out.println("Incorrect Date");
+
                     }
 
                     if ((profileNameField.getText().matches("[A-Z]{1}[a-z]{1,29}")) && profileBirthdayField.getText().matches("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))") && dateIsRight) {
@@ -95,6 +97,14 @@ public class ProfileManager extends CurrentSession implements Runnable{
 
                         JOptionPane.showMessageDialog(frame, "Gegevens zijn succesvol aangepast.", "Succes", JOptionPane.INFORMATION_MESSAGE);
                     } else {
+                        JOptionPane.showMessageDialog(frame, "Gegevens zijn succesvol aangepast.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    } if ((profileNameField.getText().isEmpty()) && (profileBirthdayField.getText().isEmpty())) {
+                        di.deleteProfile(profielnaam, session.getAbonneeID());
+                        JOptionPane.showMessageDialog(frame, "Profiel is verwijderd.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    }
+
+                    else {
+
                         JOptionPane.showMessageDialog(frame, "De opgegeven naam of geboortedatum voldoet niet aan de vereisten. \n" +
                                                             "Voorbeeld: Bas, 1998-11-24", "Fout!", JOptionPane.ERROR_MESSAGE);
                     }
@@ -104,6 +114,66 @@ public class ProfileManager extends CurrentSession implements Runnable{
 
             basePanel.add(editButton, gbc);
 
+        }
+        if (i > 0 && i < 6) {
+            JLabel newProfileLabel = new JLabel("Nieuw Profiel " + i);
+            gbc.anchor = GridBagConstraints.EAST;
+            gbc.gridx = 0;
+            gbc.gridy = i;
+            basePanel.add(newProfileLabel, gbc);
+
+
+            JTextField newProfileNameField = new JTextField("");
+            newProfileNameField.setPreferredSize(new Dimension(100, 20));
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.gridx = 1;
+            gbc.gridy = i;
+            basePanel.add(newProfileNameField, gbc);
+
+
+            JTextField newProfileBirthdayField = new JTextField("YYYY-MM-DD");
+            newProfileBirthdayField.setPreferredSize(new Dimension(100, 20));
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.gridx = 2;
+            gbc.gridy = i;
+            basePanel.add(newProfileBirthdayField, gbc);
+
+            JButton newProfileButton = new JButton("Voeg toe");
+            newProfileButton.setPreferredSize(new Dimension(100, 20));
+            gbc.gridx = 3;
+            gbc.gridy = i;
+
+            basePanel.add(newProfileButton, gbc);
+            newProfileButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    DatabaseConnection.connect();
+
+                    boolean dateIsRight = false;
+                    try {
+                        dateIsRight = new SimpleDateFormat("yyyy-MM-dd").parse(newProfileBirthdayField.getText()).before(new Date());
+                    } catch (ParseException parseException) {
+                        System.out.println("Invalid date");
+                    }
+
+                    if ((newProfileNameField.getText().matches("[A-Z]{1}[a-z]{1,29}")) && newProfileBirthdayField.getText().matches("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))") && dateIsRight) {
+                        di.addProfile(newProfileNameField.getText(), newProfileBirthdayField.getText(), session.getAbonneeID());
+
+                        JOptionPane.showMessageDialog(frame, "Gegevens zijn succesvol aangepast.", "Succes", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "De opgegeven naam of geboortedatum voldoet niet aan de vereisten. \n" +
+                                "Voorbeeld: Bas, 1998-11-24", "Fout!", JOptionPane.ERROR_MESSAGE);
+                    }
+                    DatabaseConnection.disconnect();
+                }
+            });
+
+
+        } else {
+            gbc.gridx = 0;
+            gbc.gridy = 6;
+            JLabel errorMessage = new JLabel("<html>Je hebt al 5 profielen.<br/>Geen nieuwe mogelijk.</html>");
+            basePanel.add(errorMessage, gbc);
         }
 
         gbc.anchor = GridBagConstraints.EAST;
