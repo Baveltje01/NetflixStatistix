@@ -138,10 +138,7 @@ public class AccountManager extends CurrentSession implements Runnable{
                 String password = String.valueOf(passwordField.getPassword());
                 di.changeAccountPassword(session.getAbonneeID(), password);
 
-                JOptionPane.showMessageDialog(frame,
-                        "Gegevens zijn succesvol aangepast.",
-                        "Succes",
-                        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "Gegevens zijn succesvol aangepast.", "Succes", JOptionPane.INFORMATION_MESSAGE);
 
                 DatabaseConnection.disconnect();
 

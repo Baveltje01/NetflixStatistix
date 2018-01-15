@@ -261,7 +261,7 @@ public class DatabaseInterface {
     // PROFILE NAME ADJUST
     public void changeProfileName (String nieuweProfielnaam, String oudeProfielnaam, int AbonneeID) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Profiel.Profielnaam = '" + nieuweProfielnaam + "' WHERE  Profiel.Profielnaam = '" + oudeProfielnaam + "' AND Profiel.AbonneeID = '" + AbonneeID + "';");
+            DatabaseConnection.giveStatement("UPDATE Profiel SET Profielnaam = '" + nieuweProfielnaam + "' WHERE  Profielnaam = '" + oudeProfielnaam + "' AND AbonneeID = '" + AbonneeID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
@@ -270,7 +270,7 @@ public class DatabaseInterface {
     // PROFILE DATE OF BIRTH ADJUST
     public void changeProfileDateOfBirth (String nieuweGeboortedatum, String Profielnaam, int AbonneeID) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Profiel.Geboortedatum = '" + nieuweGeboortedatum + "' WHERE  Profiel.Profielnaam = '" + Profielnaam + "' AND Profiel.AbonneeID = '" + AbonneeID + "';");
+            DatabaseConnection.giveStatement("UPDATE Profiel SET Geboortedatum = '" + nieuweGeboortedatum + "' WHERE  Profielnaam = '" + Profielnaam + "' AND AbonneeID = '" + AbonneeID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
@@ -374,23 +374,22 @@ public class DatabaseInterface {
         }
     }
 
-    // (String[]) GET LIST OF PROFILE NAMES FROM ACCOUNT
-    public String[] getListOfProfilesFromAccount(int AbonneeID) {
+    // (ArrayList<String>) GET LIST OF PROFILE NAMES FROM ACCOUNT
+    public ArrayList<String> getListOfProfilesFromAccount(int AbonneeID) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profiel.Naam FROM Abonnee JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.AbonneeID = '"  + AbonneeID +  "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Profielnaam FROM Profiel WHERE AbonneeID = '"  + AbonneeID +  "';");
             ArrayList<String> listOfProfilesFromAccount = new ArrayList<String>();
             while (rs.next()) {
-                listOfProfilesFromAccount.add(rs.getString("Naam"));
+                listOfProfilesFromAccount.add(rs.getString("Profielnaam"));
             }
-            String[] array = new String[listOfProfilesFromAccount.size()];
-            array = listOfProfilesFromAccount.toArray(array);
-            return array;
+
+            return listOfProfilesFromAccount;
 
         } catch (Exception e) {
             System.out.println("Error fetching list of profile names, " + e.getMessage());
-            String[] array2 = new String[0];
-            Arrays.fill(array2, "Error fetching list of profile names");
-            return array2;
+            ArrayList<String> listOfProfilesFromAccountTwo = new ArrayList<String>();
+            listOfProfilesFromAccountTwo.add("No profiles on account");
+            return listOfProfilesFromAccountTwo;
         }
     }
 

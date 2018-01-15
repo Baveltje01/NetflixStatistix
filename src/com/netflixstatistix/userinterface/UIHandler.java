@@ -19,6 +19,7 @@ package com.netflixstatistix.userinterface;
         import com.netflixstatistix.session.CurrentSession;
         import com.netflixstatistix.userinterface.about.AboutInterface;
         import com.netflixstatistix.userinterface.account.AccountManager;
+        import com.netflixstatistix.userinterface.account.ProfileManager;
 
 
         import static java.awt.GridBagConstraints.FIRST_LINE_START;
@@ -162,8 +163,18 @@ public class UIHandler extends CurrentSession {
                 SwingUtilities.invokeLater(accountManager);
             }
         });
-
         showSubContainer.add(userMenuButton, gbc2);
+
+
+        JButton profileMenuButton = new JButton("Wijzig Profielen");
+        profileMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ProfileManager profileManager = new ProfileManager();
+                SwingUtilities.invokeLater(profileManager);
+            }
+        });
+        showSubContainer.add(profileMenuButton, gbc2);
 
         showSubContainer.validate();
         showSubContainer.repaint();
