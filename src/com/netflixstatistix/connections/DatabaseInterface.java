@@ -97,6 +97,25 @@ public class DatabaseInterface {
         }
     }
 
+    // (String[]) GET ALL MOVIES VIEWED BY SINGLE ACCOUNT(via Abonnee.Naam)
+    public ArrayList<String> getAllMoviesViewedByAccountName(String AbonneeNaam) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT DISTINCT Film.Titel FROM Film JOIN Programma ON Film.ProgrammaID = Programma.ProgrammaID JOIN BekekenProgramma ON Programma.ProgrammaID = BekekenProgramma.ProgrammaID JOIN Profiel ON Profiel.Profielnaam = BekekenProgramma.Profielnaam JOIN Abonnee ON Abonnee.AbonneeID = Profiel.AbonneeID WHERE Abonnee.Naam = '" + AbonneeNaam + "';");
+            ArrayList<String> moviesViewedByAccount = new ArrayList<String>();
+            while (rs.next()) {
+                moviesViewedByAccount.add(rs.getString("Titel"));
+            }
+            String[] array = new String[moviesViewedByAccount.size()];
+            return moviesViewedByAccount;
+
+        } catch (Exception e) {
+            System.out.println("An Error Occurred.. " + e.getMessage());
+            ArrayList<String> moviesViewedByAccountTwo = new ArrayList<String>();
+            moviesViewedByAccountTwo.add("No movies watched.");
+            return moviesViewedByAccountTwo;
+        }
+    }
+
 
     // (ArrayList<String>) GET ALL ACCOUNTS WITH ONLY A SINGLE PROFILE
     public ArrayList<String> getAccountsWithSingleProfile () {

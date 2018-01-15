@@ -326,15 +326,41 @@ public class UIHandler extends CurrentSession {
                 gbc.weighty = 2;
                 gbc.gridy = 1;
                 frame.add(accountField, gbc);
+
                 gbc.gridy = 2;
                 frame.add(execute, gbc);
 
-                JList movieField = new JList();
-                movieField.setSize(30,30);
-                movieField.setVisible(true);
-                gbc.gridy = 3;
-                frame.add(movieField,gbc);
 
+
+
+                execute.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        try{
+                        Object accountSelection = accountField.getSelectedItem();
+
+
+                        DatabaseConnection.connect();
+                        ArrayList<String> movieArray = di.getAllMoviesViewedByAccountName(String.valueOf(accountSelection));
+                        DatabaseConnection.disconnect();
+
+                        JList movieField = new JList(new Vector<>(movieArray));
+                        movieField.setSize(30,60);
+
+                        gbc.gridy = 3;
+
+
+                        frame.add(movieField,gbc);
+                        execute.setVisible(false);
+                        movieField.setVisible(true);
+                        centerContainer.revalidate();
+                        centerContainer.repaint();
+                        }
+
+                        catch(Exception a){
+                            System.out.println("Error outputting list of movies viewed by account.");
+                        }
+                    }
+                });
 
                 // ADDING frames to internalcontainer
                 internalFrameContainer.add(frame, BorderLayout.CENTER);
