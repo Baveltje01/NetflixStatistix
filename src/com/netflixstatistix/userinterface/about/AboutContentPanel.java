@@ -15,24 +15,24 @@ public class AboutContentPanel extends JPanel{
 
         // UI components
 
-        JLabel accountLabel = new JLabel("Over ons");                          // Header
-        JFormattedTextField accountList = new JFormattedTextField("App gebouwd in Java door Bas van Rooten en Tom Schoonbeek");       // List of available accounts
+        JLabel accountLabel = new JLabel("");
+        JLabel image = new JLabel(new ImageIcon("src\\com.netflixstatistix\\userinterface\\about\\logo.jpg"));
+        JTextArea aboutList = new JTextArea("Deze applicatie is gebouwd in opdracht van Avans Hogeschool.");
 
-        gc.anchor = GridBagConstraints.LINE_END;
+        gc.anchor = GridBagConstraints.CENTER;
         gc.weightx = 0.5;
         gc.weighty = 0.5;
 
         gc.gridx = 0;
         gc.gridy = 0;
-        add(accountLabel,gc);
+        image.setSize(60,60);
+        add(image,gc );
+
 
         gc.gridx = 0;
         gc.gridy = 1;
-        add(accountList,gc);
+        add(aboutList,gc);
 
-        gc.gridx = 0;
-        gc.gridy = 2;
-
+        aboutList.setVisible(true);
     }
-
 }

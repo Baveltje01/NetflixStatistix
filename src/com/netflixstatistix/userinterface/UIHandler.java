@@ -200,12 +200,12 @@ public class UIHandler extends CurrentSession {
         JLabel detailTitle = new JLabel("Details van " + movieName, JLabel.CENTER);            // TESTING SETTING
         detailTitle.setFont(new Font("Arial", Font.BOLD, 20));
 
-        JButton functie1 = new JButton("Functie1");
-        JButton functie2 = new JButton("Functie2");
-        JButton functie3 = new JButton("Functie3");
-        JButton functie4 = new JButton("Functie4");
+        JButton functie1 = new JButton("Gemiddeld % bekeken");
+        JButton functie2 = new JButton("Gem. % bekeken per Abonnee");
+        JButton functie3 = new JButton("Films bekeken door");
+        JButton functie4 = new JButton("Langste film <16");
         JButton functie5 = new JButton("Accounts met enkel Profiel");
-        JButton functie6 = new JButton("Functie6");
+        JButton functie6 = new JButton("Films volledig bekeken");
         gbc1.gridx = 0;
         gbc1.gridy = 0;
         buttonContainer.add(functie1,gbc1);
@@ -414,7 +414,7 @@ public class UIHandler extends CurrentSession {
             public void actionPerformed(ActionEvent e){
 
                 internalFrameContainer.removeAll();
-                JInternalFrame frame = new JInternalFrame("Functie 3", false, false, false, false);
+                JInternalFrame frame = new JInternalFrame("Films bekeken door geselecteerde abonnee", false, false, false, false);
                 frame.setLayout(new GridBagLayout());
 
                 // UI components and logic for frame
@@ -579,7 +579,7 @@ public class UIHandler extends CurrentSession {
             public void actionPerformed(ActionEvent e){
 
                 internalFrameContainer.removeAll();
-                JInternalFrame frame = new JInternalFrame("Functie 6", false, false, false, false);
+                JInternalFrame frame = new JInternalFrame("Films volledig bekeken", false, false, false, false);
                 frame.setLayout(new GridBagLayout());
 
 
