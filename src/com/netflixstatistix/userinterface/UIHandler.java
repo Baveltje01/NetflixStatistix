@@ -40,33 +40,12 @@ public class UIHandler extends CurrentSession {
     public JMenuBar mainMenu() {
         JMenuBar topMenuBar = new JMenuBar();
 
-        JMenu accountMenu;
-        JMenuItem changeAccountMenuItem;
-        JMenu dataMenu;
         JMenuItem refreshDataMenuItem;
         JMenu infoMenu;
         JMenuItem avansItemMenu;
         JMenuItem aboutItemMenu;
 
 
-        accountMenu = new JMenu("Account");
-
-        changeAccountMenuItem = new JMenuItem("Accountgegevens aanpassen");
-        accountMenu.add(changeAccountMenuItem);
-
-        changeAccountMenuItem.addActionListener(new ActionListener() {                                                      // NEW WINDOW OPENS ON PRESSING 'changeAccountMenuItem'
-            public void actionPerformed(ActionEvent e){
-                                                                                                                            // STUB
-            }
-        });
-
-        dataMenu = new JMenu("Gegevens");
-
-        refreshDataMenuItem = new JMenuItem("Refresh gegevens");
-        dataMenu.add(refreshDataMenuItem);
-
-        topMenuBar.add(accountMenu);
-        topMenuBar.add(dataMenu);
 
 
         infoMenu = new JMenu("Info");
@@ -93,8 +72,7 @@ public class UIHandler extends CurrentSession {
             }
         });
 
-        topMenuBar.add(accountMenu);
-        topMenuBar.add(dataMenu);
+
         topMenuBar.add(infoMenu);
 
         return topMenuBar;
