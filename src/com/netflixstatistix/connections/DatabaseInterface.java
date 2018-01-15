@@ -586,6 +586,37 @@ public class DatabaseInterface {
         }
     }
 
+    // (STRING[]) GET ALL MOVIES
+    public String[] getAllMovies() {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT Titel FROM Film");
+            ArrayList<String> listOfMovies = new ArrayList<String>();
+            while (rs.next()) {
+                listOfMovies.add(rs.getString("Titel"));
+            }
+            String[] array = new String[listOfMovies.size()];
+            array = listOfMovies.toArray(array);
+            return array;
+        } catch (Exception e) {
+            System.out.println("Error fetching all movies, " + e.getMessage());
+            return null;
+        }
+    }
+
+    public int getAmountOfPeopleWhoFullyWatchedAMovie(String movieName) {
+        try {
+            rs = DatabaseConnection.giveStatementAndGetResult("SELECT COUNT(*) AS Getal FROM BekekenProgramma WHERE Titel = '" + movieName + "' AND Percentage = '100'");
+            int output = 0;
+            while (rs.next()) {
+                output = rs.getInt("Getal");
+            }
+            return output;
+        } catch (Exception e) {
+            System.out.println("Error fetching watched amount int by movie" + e.getMessage());
+            return 0;
+        }
+    }
+
 
 
 }

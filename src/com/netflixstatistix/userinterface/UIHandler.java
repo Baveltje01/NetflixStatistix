@@ -475,18 +475,33 @@ public class UIHandler extends CurrentSession {
 
 
                 // UI components and logic for frame
-                JTextField textField1 = new JTextField("TEST 6 YOU");
+                JLabel textField1 = new JLabel("Selecteer een film");
                 gbc.anchor = GridBagConstraints.NORTH;
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.weighty = 0.0;
                 frame.add(textField1, gbc);
 
-                JTextField textField2 = new JTextField("KNOW DA WAE");
+                JComboBox movieList = new JComboBox(session.getAllMoviesArray());
                 gbc.gridx = 0;
                 gbc.gridy = 1;
                 gbc.weighty = 1.0;
-                frame.add(textField2, gbc);
+                frame.add(movieList, gbc);
+
+                movieList.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+
+                        DatabaseConnection.connect();
+
+                        int result = di.getAmountOfPeopleWhoFullyWatchedAMovie(movieList.getSelectedItem().toString());
+                        JTextField output = new JTextField("In totaal hebben " + result + " gebruikers de film compleet gezien.");
+                        gbc.gridy = 2;
+                        frame.add(output, gbc);
+                        DatabaseConnection.disconnect();
+                        frame.revalidate();
+                        frame.repaint();
+                    }
+                });
 
 
                 // ADDING frames to internalcontainer
@@ -515,5 +530,6 @@ public class UIHandler extends CurrentSession {
 
         return centerContainer;
     }
-}
 
+
+}

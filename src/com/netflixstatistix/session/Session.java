@@ -30,7 +30,9 @@ public class Session {
     private String currentVideoTitle;
     private ArrayList<String> accountsWithOneProfile;
     private String longestMovieUnder16;
-
+    private String[] allMoviesArray;
+    private String selectedMovie;
+    private int selectedMoviePercentage;
 
 
     public Session() {
@@ -52,11 +54,12 @@ public class Session {
         this.currentVideoTitle = this.latestVideoTitleArray.get(0);
         this.accountsWithOneProfile = di.getAccountsWithSingleProfile();
         this.longestMovieUnder16 = di.getLongestMovieUnderSixteen();
-
+        this.allMoviesArray = di.getAllMovies();
 
 
         DatabaseConnection.disconnect();
     }
+
     public int getAbonneeID() {
         return abonneeID;
     }
@@ -175,5 +178,24 @@ public class Session {
 
     public void setLongestMovieUnder16(String longestMovieUnder16) {
         this.longestMovieUnder16 = longestMovieUnder16;
+    }
+
+    public String[] getAllMoviesArray() {
+        return allMoviesArray;
+    }
+
+    public void setAllMoviesArray(String[] allMoviesArray) {
+        this.allMoviesArray = allMoviesArray;
+    }
+
+    public int getSelectedMovieDetails() {
+        DatabaseConnection.connect();
+        this.selectedMoviePercentage = di.getAmountOfPeopleWhoFullyWatchedAMovie(selectedMovie);
+        DatabaseConnection.disconnect();
+        return selectedMoviePercentage;
+    }
+
+    public void setSelectedMovie(String selectedMovie) {
+        this.selectedMovie = selectedMovie;
     }
 }
