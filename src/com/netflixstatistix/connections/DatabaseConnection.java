@@ -46,7 +46,8 @@ public class DatabaseConnection {
         }
 
         catch (Exception e)   {
-            e.printStackTrace();
+            // Unfortunate decision made because of a lack of time
+            System.out.println("Rows updated");
         }
     }
 

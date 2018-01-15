@@ -130,7 +130,19 @@ public class AccountManager extends CurrentSession implements Runnable{
             public void actionPerformed(ActionEvent e) {
                 DatabaseConnection.connect();
                 di.changeAccountName(session.getAbonneeID(), voornaamField.getText());
-//                di.change
+                di.changeAccountStreet(session.getAbonneeID(), streetField.getText());
+                di.changeAccountHouseNumber(session.getAbonneeID(), houseNumberField.getText());
+                di.changeCity(session.getAbonneeID(), cityField.getText());
+                di.changeAccountZIP(session.getAbonneeID(), zipField.getText());
+                di.changeAccountEmail(session.getAbonneeID(), emailField.getText());
+                String password = String.valueOf(passwordField.getPassword());
+                di.changeAccountPassword(session.getAbonneeID(), password);
+
+                JOptionPane.showMessageDialog(frame,
+                        "Gegevens zijn succesvol aangepast.",
+                        "Succes",
+                        JOptionPane.INFORMATION_MESSAGE);
+
                 DatabaseConnection.disconnect();
 
 

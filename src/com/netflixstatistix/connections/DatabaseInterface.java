@@ -176,7 +176,7 @@ public class DatabaseInterface {
     // ACCOUNT ADJUST EMAIL
     public void changeAccountEmail (int AccountID, String newEmail) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Email = '" + newEmail + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+            DatabaseConnection.giveStatement("UPDATE Abonnee SET Abonnee.Email = '" + newEmail + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
@@ -185,7 +185,7 @@ public class DatabaseInterface {
     // ACCOUNT ADJUST PASSWORD
     public void changeAccountPassword (int AccountID, String newPassword) {
         try {
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Wachtwoord = '" + newPassword + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+            DatabaseConnection.giveStatement("UPDATE Abonnee SET Abonnee.Wachtwoord = '" + newPassword + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
@@ -203,7 +203,7 @@ public class DatabaseInterface {
     // ACCOUNT ADJUST STREET
     public void changeAccountStreet (int AccountID, String newStreet) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Straat = '" + newStreet + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+            DatabaseConnection.giveStatement("UPDATE Abonnee SET Abonnee.Straat = '" + newStreet + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
@@ -212,7 +212,7 @@ public class DatabaseInterface {
     // ACCOUNT ADJUST HOUSENUMBER
     public void changeAccountHouseNumber (int AccountID, String newHouseNumber) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Huisnummer = '" + newHouseNumber + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+            DatabaseConnection.giveStatement("UPDATE Abonnee SET Abonnee.Huisnummer = '" + newHouseNumber + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
@@ -221,7 +221,7 @@ public class DatabaseInterface {
     // ACCOUNT ADJUST ZIP CODE
     public void changeAccountZIP (int AccountID, String newZIP) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Postcode = '" + newZIP + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+           DatabaseConnection.giveStatement("UPDATE Abonnee SET Abonnee.Postcode = '" + newZIP + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
@@ -230,7 +230,7 @@ public class DatabaseInterface {
     // ACCOUNT ADJUST CITY
     public void changeCity (int AccountID, String newCity) {
         try{
-            rs = DatabaseConnection.giveStatementAndGetResult("UPDATE Abonnee SET Abonnee.Woonplaats = '" + newCity + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
+            DatabaseConnection.giveStatement("UPDATE Abonnee SET Abonnee.Woonplaats = '" + newCity + "' WHERE  Abonnee.AbonneeID = '" + AccountID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
