@@ -260,7 +260,7 @@ public class UIHandler extends CurrentSession {
             public void actionPerformed(ActionEvent e){
 
                 internalFrameContainer.removeAll();
-                JInternalFrame frame = new JInternalFrame("Functie 1", false, false, false, false);
+                JInternalFrame frame = new JInternalFrame("Gemiddeld % bekeken", false, false, false, false);
                 frame.setLayout(new GridBagLayout());
                 JLabel header = new JLabel("Gemiddeld bekeken percentage van afleveringen van serie");
 
@@ -343,7 +343,7 @@ public class UIHandler extends CurrentSession {
             public void actionPerformed(ActionEvent e){
 
                 internalFrameContainer.removeAll();
-                JInternalFrame frame = new JInternalFrame("Functie 2", false, false, false, false);
+                JInternalFrame frame = new JInternalFrame("Gem. % bekeken per Abonnee", false, false, false, false);
                 frame.setLayout(new GridBagLayout());
                 JLabel header = new JLabel("Gemiddeld bekeken percentage van afleveringen van serie per account");
 
