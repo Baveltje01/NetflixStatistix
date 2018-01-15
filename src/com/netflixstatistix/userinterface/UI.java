@@ -54,7 +54,7 @@ public class UI extends CurrentSession implements Runnable {
 
         // Adding WestContainer
 
-        createLeftProfileMenu = uih.createLeftProfileMenu(session.getAbonneeID(), session.getProfielNaam(), session.getAbonneeEmail());
+        createLeftProfileMenu = uih.createLeftProfileMenu(session.getAbonneeID(), "Admin", "basvanrooten@me.com");
         westContainer.add(createLeftProfileMenu, BorderLayout.NORTH);
         westContainer.add(uih.createUserMenuButtons(), BorderLayout.SOUTH);
         pane.add(westContainer, BorderLayout.WEST);
