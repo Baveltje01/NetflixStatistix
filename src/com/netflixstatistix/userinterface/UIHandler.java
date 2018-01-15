@@ -188,11 +188,6 @@ public class UIHandler extends CurrentSession {
         JButton functie4 = new JButton("Functie4");
         JButton functie5 = new JButton("Functie5");
         JButton functie6 = new JButton("Functie6");
-        JInternalFrame frame3 = new JInternalFrame("Functie 3", false, false, false, false);
-        JInternalFrame frame4 = new JInternalFrame("Functie 4", false, false, false, false);
-        JInternalFrame frame5 = new JInternalFrame("Functie 5", false, false, false, false);
-        JInternalFrame frame6 = new JInternalFrame("Functie 6", false, false, false, false);
-
         gbc1.gridx = 0;
         gbc1.gridy = 0;
         buttonContainer.add(functie1,gbc1);
@@ -270,6 +265,46 @@ public class UIHandler extends CurrentSession {
 
 
                 // UI components and logic for frame
+                JTextField textField1 = new JTextField("DDDDASDDDD YOU");
+                gbc.anchor = GridBagConstraints.NORTH;
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.weighty = 0.0;
+                frame.add(textField1, gbc);
+
+                JTextField textField2 = new JTextField("KNOW DA WAE");
+                gbc.gridx = 0;
+                gbc.gridy = 1;
+                gbc.weighty = 1.0;
+                frame.add(textField2, gbc);
+
+
+                // ADDING frames to internalcontainer
+                internalFrameContainer.add(frame, BorderLayout.CENTER);
+
+
+                // MAXIMIZE FRAME
+                try {
+                    frame.setMaximum(true);
+                } catch (PropertyVetoException exception) {
+                    System.out.println("Error full-screening frame.");
+                }
+
+                centerContainer.revalidate();
+                centerContainer.repaint();
+                frame.setVisible(true);
+            }
+        });
+
+        functie3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+
+                internalFrameContainer.removeAll();
+                JInternalFrame frame = new JInternalFrame("Functie 3", false, false, false, false);
+                frame.setLayout(new GridBagLayout());
+
+
+                // UI components and logic for frame
                 JTextField textField1 = new JTextField("DDDDDDD YOU");
                 gbc.anchor = GridBagConstraints.NORTH;
                 gbc.gridx = 0;
@@ -300,6 +335,128 @@ public class UIHandler extends CurrentSession {
                 frame.setVisible(true);
             }
         });
+
+        functie4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+
+                internalFrameContainer.removeAll();
+                JInternalFrame frame = new JInternalFrame("Functie 4", false, false, false, false);
+                frame.setLayout(new GridBagLayout());
+
+
+                // UI components and logic for frame
+                JTextField textField1 = new JTextField("ASDASDASD YOU");
+                gbc.anchor = GridBagConstraints.NORTH;
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.weighty = 0.0;
+                frame.add(textField1, gbc);
+
+                JTextField textField2 = new JTextField("KNOW DA WAE");
+                gbc.gridx = 0;
+                gbc.gridy = 1;
+                gbc.weighty = 1.0;
+                frame.add(textField2, gbc);
+
+
+                // ADDING frames to internalcontainer
+                internalFrameContainer.add(frame, BorderLayout.CENTER);
+
+
+                // MAXIMIZE FRAME
+                try {
+                    frame.setMaximum(true);
+                } catch (PropertyVetoException exception) {
+                    System.out.println("Error full-screening frame.");
+                }
+
+                centerContainer.revalidate();
+                centerContainer.repaint();
+                frame.setVisible(true);
+            }
+        });
+
+        functie5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+
+                internalFrameContainer.removeAll();
+                JInternalFrame frame = new JInternalFrame("Functie 5", false, false, false, false);
+                frame.setLayout(new GridBagLayout());
+
+
+                // UI components and logic for frame
+                JTextField textField1 = new JTextField("TEST 5 YOU");
+                gbc.anchor = GridBagConstraints.NORTH;
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.weighty = 0.0;
+                frame.add(textField1, gbc);
+
+                JTextField textField2 = new JTextField("KNOW DA WAE");
+                gbc.gridx = 0;
+                gbc.gridy = 1;
+                gbc.weighty = 1.0;
+                frame.add(textField2, gbc);
+
+
+                // ADDING frames to internalcontainer
+                internalFrameContainer.add(frame, BorderLayout.CENTER);
+
+
+                // MAXIMIZE FRAME
+                try {
+                    frame.setMaximum(true);
+                } catch (PropertyVetoException exception) {
+                    System.out.println("Error full-screening frame.");
+                }
+
+                centerContainer.revalidate();
+                centerContainer.repaint();
+                frame.setVisible(true);
+            }
+        });
+
+        functie6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+
+                internalFrameContainer.removeAll();
+                JInternalFrame frame = new JInternalFrame("Functie 6", false, false, false, false);
+                frame.setLayout(new GridBagLayout());
+
+
+                // UI components and logic for frame
+                JTextField textField1 = new JTextField("TEST 6 YOU");
+                gbc.anchor = GridBagConstraints.NORTH;
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.weighty = 0.0;
+                frame.add(textField1, gbc);
+
+                JTextField textField2 = new JTextField("KNOW DA WAE");
+                gbc.gridx = 0;
+                gbc.gridy = 1;
+                gbc.weighty = 1.0;
+                frame.add(textField2, gbc);
+
+
+                // ADDING frames to internalcontainer
+                internalFrameContainer.add(frame, BorderLayout.CENTER);
+
+
+                // MAXIMIZE FRAME
+                try {
+                    frame.setMaximum(true);
+                } catch (PropertyVetoException exception) {
+                    System.out.println("Error full-screening frame.");
+                }
+
+                centerContainer.revalidate();
+                centerContainer.repaint();
+                frame.setVisible(true);
+            }
+        });
+
+
 
         DatabaseConnection.disconnect();
 
