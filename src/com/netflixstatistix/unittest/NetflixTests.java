@@ -40,7 +40,7 @@ public class NetflixTests {
     public void sessionConnectionTest() {
 
         // Gather info and set parameter
-        Session session = new Session();
+        Session session = new Session(1215426);
 
         // Set comparison
         int testAbonneeID = 1215426;

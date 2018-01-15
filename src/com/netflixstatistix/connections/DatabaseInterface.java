@@ -699,7 +699,21 @@ public class DatabaseInterface {
         }
     }
 
+    public int getAccountIDByAccountName(String accountName) {
+        rs = DatabaseConnection.giveStatementAndGetResult("SELECT AbonneeID FROM Abonnee WHERE Naam = '" + accountName + "';");
 
+        try {
+            int output = 0;
+            while (rs.next()) {
+                output = rs.getInt("AbonneeID");
+            }
+            return output;
+        } catch (Exception e) {
+            System.out.println("Error getting AccountID By AccountName");
+            return 0;
+        }
+
+    }
 
 }
 

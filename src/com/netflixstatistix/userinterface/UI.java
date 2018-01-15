@@ -28,8 +28,8 @@ public class UI extends CurrentSession implements Runnable {
     @Override
     public void run() {
         this.frame = new JFrame("Netflix Statistix");
-        this.frame.setPreferredSize(new Dimension(800, 800));
-        this.frame.setMinimumSize(new Dimension(700,700));
+        this.frame.setPreferredSize(new Dimension(1220, 800));
+        this.frame.setMinimumSize(new Dimension(1210,700));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         createComponents(frame.getContentPane());

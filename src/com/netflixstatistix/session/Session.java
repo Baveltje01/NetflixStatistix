@@ -35,9 +35,9 @@ public class Session {
     private int selectedMoviePercentage;
 
 
-    public Session() {
+    public Session(int subID) {
         DatabaseConnection.connect();
-        this.abonneeID = 1215426;
+        this.abonneeID = subID;
         this.abonneeEmail = di.getEmailFromAccount(abonneeID);
         this.abonneeWachtwoord = di.getPasswordFromAccount(abonneeID);
         this.abonneeNaam = di.getNameFromAccount(abonneeID);

@@ -17,6 +17,7 @@ package com.netflixstatistix.userinterface;
         import com.netflixstatistix.connections.DatabaseInterface;
         import com.netflixstatistix.jgravatar.*;
         import com.netflixstatistix.session.CurrentSession;
+        import com.netflixstatistix.session.Session;
         import com.netflixstatistix.userinterface.about.AboutInterface;
         import com.netflixstatistix.userinterface.account.AccountManager;
         import com.netflixstatistix.userinterface.account.ProfileManager;
@@ -102,10 +103,27 @@ public class UIHandler extends CurrentSession {
         DatabaseConnection.connect();
         JPanel leftProfileMenu = new JPanel(new BorderLayout());
 
-        JPanel userDropdownContainer = new JPanel(new BorderLayout());
-        JComboBox usersDropdown = new JComboBox(di.getProfielenFromAbonnee(abonneeID));                                                             // FIXFIXFIXFIX
-        usersDropdown.setSelectedIndex(0);
-        userDropdownContainer.add(usersDropdown, BorderLayout.NORTH);
+        JPanel subscriberDropdownContainer = new JPanel(new BorderLayout());
+        JComboBox subscriberDropdown = new JComboBox(di.getListOfAccountNames());
+
+        subscriberDropdown.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DatabaseConnection.connect();
+                String output = subscriberDropdown.getSelectedItem().toString();
+                int result = di.getAccountIDByAccountName(output);
+
+                session = new Session(result);
+                UI ui = new UI();
+
+                DatabaseConnection.disconnect();
+
+            }
+        });
+
+
+
+        subscriberDropdownContainer.add(subscriberDropdown, BorderLayout.NORTH);
 
         // UserDetails Menu
         JPanel userSubContainer = new JPanel(new BorderLayout());
@@ -123,7 +141,7 @@ public class UIHandler extends CurrentSession {
         userSubContainer.add(gravatarImage, BorderLayout.NORTH);
         userSubContainer.add(greeting, BorderLayout.SOUTH);
 
-        leftProfileMenu.add(userDropdownContainer, BorderLayout.NORTH);
+        leftProfileMenu.add(subscriberDropdownContainer, BorderLayout.NORTH);
         leftProfileMenu.add(userSubContainer, BorderLayout.SOUTH);
 
         DatabaseConnection.disconnect();
@@ -609,6 +627,8 @@ public class UIHandler extends CurrentSession {
                         DatabaseConnection.disconnect();
                         frame.revalidate();
                         frame.repaint();
+
+                        DatabaseConnection.disconnect();
                     }
                 });
 
