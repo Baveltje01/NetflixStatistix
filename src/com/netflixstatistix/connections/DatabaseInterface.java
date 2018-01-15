@@ -240,7 +240,7 @@ public class DatabaseInterface {
     public void addProfile (String Profielnaam, String Geboortedatum, int AbonneeID) {
         try {
             if(getAmountOfProfilesOnAccount(AbonneeID) < 5){
-                DatabaseConnection.giveStatement("INSERT INTO Profiel (Profielnaam,Geboortedatum,AbonneeID) VALUES ('" + Profielnaam + "','" + Geboortedatum + "','" + AbonneeID + "');");
+                rs = DatabaseConnection.giveStatementAndGetResult("INSERT INTO Profiel (Profielnaam,Geboortedatum,AbonneeID) VALUES ('" + Profielnaam + "','" + Geboortedatum + "','" + AbonneeID + "');");
             } else {
                 System.out.println("Profile cannot be added. Max number of profiles on account " + AbonneeID + " reached.");
             }
@@ -252,7 +252,7 @@ public class DatabaseInterface {
     // DELETE PROFILE FROM ACCOUNT
     public void deleteProfile (String Profielnaam, int AbonneeID) {
         try{
-            DatabaseConnection.giveStatement("DELETE FROM Profiel WHERE Profiel.Profielnaam = '" + Profielnaam + "' AND Profiel.AbonneeID = '" + AbonneeID + "';");
+            rs = DatabaseConnection.giveStatementAndGetResult("DELETE FROM Profiel WHERE Profiel.Profielnaam = '" + Profielnaam + "' AND Profiel.AbonneeID = '" + AbonneeID + "';");
         } catch (Exception e) {
             System.out.println("An Error Occurred.. " + e.getMessage());
         }
